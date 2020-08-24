@@ -1,5 +1,6 @@
 import { LOGIN_START, FETCH_LOGIN_SUCCESS } from "./actions";
 
+
 const initialState = {
   isLoading: false,
   data: "",
@@ -19,4 +20,7 @@ const reducer = (state = initialState, action) => {
         data: action.payload,
       };
   }
+
+  
+
 };
