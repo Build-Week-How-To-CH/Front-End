@@ -1,100 +1,103 @@
-import React, { useState, useEffect } from 'react';
-import {NavLink, Route, Switch} from 'react-router-dom';
-import axios from 'axios';
-import * as yup from 'yup';
-import './App.css';
-import SignUp from './components/SignUp';
-import formSchema from './components/FormSchema'
+import React, { useState, useEffect } from "react";
+import { NavLink, Route, Switch } from "react-router-dom";
+import axios from "axios";
+import * as yup from "yup";
+import "./App.css";
+import SignUp from "./components/SignUp";
+import formSchema from "./components/FormSchema";
+import { Login } from "./components/Login";
 
 // SIGNUP
 
 const initialFormValues = {
-  email: '',
-  username: '',
-  password: '',
-}
+  email: "",
+  username: "",
+  password: "",
+};
 
 const initialFormErrors = {
-  email: '',
-  username: '',
-  password: '',
-}
+  email: "",
+  username: "",
+  password: "",
+};
 
-const initialDisabled = true
+const initialDisabled = true;
 
 function App() {
-
-  const [users, setUsers] = useState([])
-  const [formValues, setFormValues] = useState(initialFormValues)
-  const [formErrors, setFormErrors] = useState(initialFormErrors)
-  const [disabled, setDisabled] = useState(initialDisabled)
+  const [users, setUsers] = useState([]);
+  const [formValues, setFormValues] = useState(initialFormValues);
+  const [formErrors, setFormErrors] = useState(initialFormErrors);
+  const [disabled, setDisabled] = useState(initialDisabled);
 
   const getUsers = () => {
-    axios.get('https://bw-how-2.herokuapp.com/api/users')
-      .then(res => {
-        console.log(res)
+    axios
+      .get("https://bw-how-2.herokuapp.com/api/users")
+      .then((res) => {
+        console.log(res);
       })
-      .catch(err => {
-        debugger
-      })
-  }
+      .catch((err) => {
+        debugger;
+      });
+  };
 
-  const postNewUser = newUser => {
-    axios.post('https://bw-how-2.herokuapp.com/api/users')
-      .then(res => {
-        console.log(res)
+  const postNewUser = (newUser) => {
+    axios
+      .post("https://bw-how-2.herokuapp.com/api/users")
+      .then((res) => {
+        console.log(res);
       })
-      .catch(err => {
-        debugger
+      .catch((err) => {
+        debugger;
       })
       .finally(() => {
-        setFormValues(initialFormValues)
-      })
-  }
+        setFormValues(initialFormValues);
+      });
+  };
 
   const inputChange = (name, value) => {
     yup
       .reach(formSchema, name)
       .validate(value)
-      .then(valid => {
+      .then((valid) => {
         setFormErrors({
           ...formErrors,
-          [name]: '',
-        })
-      })
-  }
+          [name]: "",
+        });
+      });
+  };
 
   const submit = () => {
     const newUser = {
       name: formValues.email.trim(),
       username: formValues.username.trim(),
       password: formValues.password.trim(),
-    }
-    postNewUser(newUser)
-  }
+    };
+    postNewUser(newUser);
+  };
 
   useEffect(() => {
-    getUsers()
-  }, [])
+    getUsers();
+  }, []);
 
   useEffect(() => {
-    formSchema.isValid(formValues)
-      .then(valid => {
-        setDisabled(!valid);
-      })
-  }, [formValues])
+    formSchema.isValid(formValues).then((valid) => {
+      setDisabled(!valid);
+    });
+  }, [formValues]);
 
   return (
     <div className="App">
-      <Route path = '/'>
-        <NavLink to = '/signup'>Sign Up</NavLink>
-        <NavLink to = '/login'>Log In</NavLink>
+      <Route path="/">
+        <NavLink to="/signup">Sign Up</NavLink>
+        <NavLink component={Login} to="/login">
+          Log In
+        </NavLink>
         <SignUp
-          values = {formValues}
-          inputChange = {inputChange}
-          submit = {submit}
-          disabled = {disabled}
-          errors = {formErrors}
+          values={formValues}
+          inputChange={inputChange}
+          submit={submit}
+          disabled={disabled}
+          errors={formErrors}
         />
       </Route>
     </div>
