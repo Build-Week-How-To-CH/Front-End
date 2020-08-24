@@ -29,61 +29,61 @@ function App() {
   const [formErrors, setFormErrors] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
 
-  const getUsers = () => {
-    axios
-      .get("https://bw-how-2.herokuapp.com/api/users")
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        debugger;
-      });
-  };
+  // const getUsers = () => {
+  //   axios
+  //     .get("https://bw-how-2.herokuapp.com/api/users")
+  //     .then((res) => {
+  //       console.log(res);
+  //     })
+  //     .catch((err) => {
+  //       debugger;
+  //     });
+  // };
 
-  const postNewUser = (newUser) => {
-    axios
-      .post("https://bw-how-2.herokuapp.com/api/users")
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        debugger;
-      })
-      .finally(() => {
-        setFormValues(initialFormValues);
-      });
-  };
+  // const postNewUser = (newUser) => {
+  //   axios
+  //     .post("https://bw-how-2.herokuapp.com/api/users")
+  //     .then((res) => {
+  //       console.log(res);
+  //     })
+  //     .catch((err) => {
+  //       debugger;
+  //     })
+  //     .finally(() => {
+  //       setFormValues(initialFormValues);
+  //     });
+  // };
 
-  const inputChange = (name, value) => {
-    yup
-      .reach(formSchema, name)
-      .validate(value)
-      .then((valid) => {
-        setFormErrors({
-          ...formErrors,
-          [name]: "",
-        });
-      });
-  };
+  // const inputChange = (name, value) => {
+  //   yup
+  //     .reach(formSchema, name)
+  //     .validate(value)
+  //     .then((valid) => {
+  //       setFormErrors({
+  //         ...formErrors,
+  //         [name]: "",
+  //       });
+  //     });
+  // };
 
-  const submit = () => {
-    const newUser = {
-      name: formValues.email.trim(),
-      username: formValues.username.trim(),
-      password: formValues.password.trim(),
-    };
-    postNewUser(newUser);
-  };
+  // const submit = () => {
+  //   const newUser = {
+  //     name: formValues.email.trim(),
+  //     username: formValues.username.trim(),
+  //     password: formValues.password.trim(),
+  //   };
+  //   postNewUser(newUser);
+  // };
 
-  useEffect(() => {
-    getUsers();
-  }, []);
+  // useEffect(() => {
+  //   getUsers();
+  // }, []);
 
-  useEffect(() => {
-    formSchema.isValid(formValues).then((valid) => {
-      setDisabled(!valid);
-    });
-  }, [formValues]);
+  // useEffect(() => {
+  //   formSchema.isValid(formValues).then((valid) => {
+  //     setDisabled(!valid);
+  //   });
+  // }, [formValues]);
 
   return (
     <div className="App">
@@ -92,13 +92,13 @@ function App() {
         <NavLink component={Login} to="/login">
           Log In
         </NavLink>
-        <SignUp
+        {/* <SignUp
           values={formValues}
           inputChange={inputChange}
           submit={submit}
           disabled={disabled}
           errors={formErrors}
-        />
+        /> */}
       </Route>
     </div>
   );
