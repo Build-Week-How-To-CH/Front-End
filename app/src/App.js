@@ -10,7 +10,6 @@ import { Login } from "./components/Login";
 // SIGNUP
 
 const initialFormValues = {
-<<<<<<< HEAD
   username: '',
   password: '',
 }
@@ -19,17 +18,6 @@ const initialFormErrors = {
   username: '',
   password: '',
 }
-=======
-  email: "",
-  username: "",
-  password: "",
-};
-
-const initialFormErrors = {
-  email: "",
-  username: "",
-  password: "",
-};
 
 const initialDisabled = true;
 
@@ -100,20 +88,23 @@ function App() {
 
   return (
     <div className="App">
-      <Route path="/">
-        <NavLink to="/signup">Sign Up</NavLink>
-        <NavLink component={Login} to="/login">
-          Log In
-        </NavLink>
-        {/* <SignUp
-          values={formValues}
-          inputChange={inputChange}
-          submit={submit}
-          disabled={disabled}
-          errors={formErrors}
-        /> */}
-      </Route>
-    </div>
+      <NavLink to="/signup">Sign Up</NavLink>
+      <NavLink to="/login" />
+      <Switch>
+        <Route exact path="/">
+          <Login />
+        </Route>
+        <Route path='/signup'>
+          <SignUp
+            values={formValues}
+            inputChange={inputChange}
+            submit={submit}
+            disabled={disabled}
+            errors={formErrors}
+          />
+        </Route>
+      </Switch>
+  </div>
   );
 }
 
