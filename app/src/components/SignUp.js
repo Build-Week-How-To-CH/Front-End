@@ -1,5 +1,5 @@
 import  React from 'react';
-import {NavLink, Route, Switch} from 'react-router-dom';
+import {NavLink, Route, Switch, useHistory} from 'react-router-dom';
 
 function SignUp(props){
 
@@ -21,6 +21,8 @@ function SignUp(props){
         inputChange(name, value)
     }
 
+    const history = useHistory()
+
     return(
         <Route path ="/signup">
             <NavLink to='/'>Home</NavLink>
@@ -34,15 +36,6 @@ function SignUp(props){
                 <div className = 'inputs'>
 
                     <h3>Sign Up</h3>
-
-                    <label>Email:&nbsp;
-                        <input
-                            value={values.email}
-                            onChange={onInputChange}
-                            name='email'
-                            type='email'
-                        />
-                    </label>
 
                     <label>Username:&nbsp;
                     <input

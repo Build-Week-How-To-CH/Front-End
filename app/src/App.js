@@ -9,13 +9,11 @@ import formSchema from './components/FormSchema'
 // SIGNUP
 
 const initialFormValues = {
-  email: '',
   username: '',
   password: '',
 }
 
 const initialFormErrors = {
-  email: '',
   username: '',
   password: '',
 }
@@ -24,31 +22,29 @@ const initialDisabled = true
 
 function App() {
 
-  const [users, setUsers] = useState([])
   const [formValues, setFormValues] = useState(initialFormValues)
   const [formErrors, setFormErrors] = useState(initialFormErrors)
   const [disabled, setDisabled] = useState(initialDisabled)
 
-  const getUsers = () => {
-    axios.get('https://reqres.in/api/users')
-      .then(res => {
-        setUsers(res.data.data)
-      })
-      .catch(err => {
-        debugger
-      })
-  }
+  // const getUsers = () => {
+  //   axios.get('https://bw-how-2.herokuapp.com/api/users')
+  //     .then(res => {
+  //       set
+  //     })
+  //     .catch(err => {
+  //       debugger
+  //     })
+  // }
 
   const postNewUser = newUser => {
-    axios.post('https://reqres.in/api/users', newUser)
+    axios.post('https://bw-how-2.herokuapp.com/api/auth/register', newUser)
       .then(res => {
-        setUsers([...users, res.data.data])
+        localStorage.setItem('token', res.data.token)
+        setFormValues(initialFormValues);
+        console.log(res.data)
       })
       .catch(err => {
         debugger
-      })
-      .finally(() => {
-        setFormValues(initialFormValues)
       })
   }
 
@@ -76,16 +72,11 @@ function App() {
 
   const submit = () => {
     const newUser = {
-      name: formValues.email.trim(),
       username: formValues.username.trim(),
       password: formValues.password.trim(),
     }
     postNewUser(newUser)
   }
-
-  useEffect(() => {
-    getUsers()
-  }, [])
 
   useEffect(() => {
     formSchema.isValid(formValues)
