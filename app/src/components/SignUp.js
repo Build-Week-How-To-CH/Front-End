@@ -28,7 +28,6 @@ function SignUp(props){
             <NavLink to='/'>Home</NavLink>
             <form className = 'form container' onSubmit={onSubmit}>
                 <div className='errors'>
-                    <div>{errors.email}</div>
                     <div>{errors.username}</div>
                     <div>{errors.password}</div>
                 </div>
