@@ -21,9 +21,10 @@ export const Login = () => {
   const login = (e) => {
     e.preventDefault();
     axiosWithAuth()
-      .post("/", creds) //need to add an endpoint
+      .post("https://bw-how-2.herokuapp.com/api/auth/login", creds) //need to add an endpoint
       .then((res) => {
-        localStorage.setItem("token", res.data.payload);
+        console.log(res.data);
+        localStorage.setItem("token", res.data.token);
         history.push("/"); //endpoint for dashboard
       })
       .catch((err) => err);
