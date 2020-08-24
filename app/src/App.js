@@ -6,101 +6,108 @@ import "./App.css";
 import SignUp from "./components/SignUp";
 import formSchema from "./components/FormSchema";
 import { Login } from "./components/Login";
+import { axiosWithAuth } from './utils/axiosWithAuth';
 
 // SIGNUP
 
 const initialFormValues = {
-  email: "",
-  username: "",
-  password: "",
-};
+  username: '',
+  password: '',
+}
 
 const initialFormErrors = {
-  email: "",
-  username: "",
-  password: "",
-};
+  username: '',
+  password: '',
+}
 
 const initialDisabled = true;
 
 function App() {
-  const [users, setUsers] = useState([]);
-  const [formValues, setFormValues] = useState(initialFormValues);
-  const [formErrors, setFormErrors] = useState(initialFormErrors);
-  const [disabled, setDisabled] = useState(initialDisabled);
+
+  const [formValues, setFormValues] = useState(initialFormValues)
+  const [formErrors, setFormErrors] = useState(initialFormErrors)
+  const [disabled, setDisabled] = useState(initialDisabled)
 
   // const getUsers = () => {
-  //   axios
-  //     .get("https://bw-how-2.herokuapp.com/api/users")
-  //     .then((res) => {
-  //       console.log(res);
+  //   axios.get('https://bw-how-2.herokuapp.com/api/users')
+  //     .then(res => {
+  //       set
   //     })
-  //     .catch((err) => {
-  //       debugger;
-  //     });
-  // };
-
-  // const postNewUser = (newUser) => {
-  //   axios
-  //     .post("https://bw-how-2.herokuapp.com/api/users")
-  //     .then((res) => {
-  //       console.log(res);
+  //     .catch(err => {
+  //       debugger
   //     })
-  //     .catch((err) => {
-  //       debugger;
-  //     })
-  //     .finally(() => {
-  //       setFormValues(initialFormValues);
-  //     });
-  // };
+  // }
 
-  // const inputChange = (name, value) => {
-  //   yup
-  //     .reach(formSchema, name)
-  //     .validate(value)
-  //     .then((valid) => {
-  //       setFormErrors({
-  //         ...formErrors,
-  //         [name]: "",
-  //       });
-  //     });
-  // };
+  const postNewUser = newUser => {
+    axiosWithAuth()
+    .post('/api/auth/register', newUser)
+      .then(res => {
+        localStorage.setItem('token', res.data.token)
+        setFormValues(initialFormValues);
+        console.log(res.data)
+      })
+      .catch(err => {
+        debugger
+      })
+  }
 
-  // const submit = () => {
-  //   const newUser = {
-  //     name: formValues.email.trim(),
-  //     username: formValues.username.trim(),
-  //     password: formValues.password.trim(),
-  //   };
-  //   postNewUser(newUser);
-  // };
+  const inputChange = (name, value) => {
+    yup
+      .reach(formSchema, name)
+      .validate(value)
+      .then(valid => {
+        setFormErrors({
+          ...formErrors,
+          [name]: '',
+        })
+      })
+      .catch(err => {
+        setFormErrors({
+          ...formErrors,
+          [name]:err.errors[0]
+        })
+      })
+      setFormValues({
+        ...formValues,
+        [name]:value
+      })
+  }
 
-  // useEffect(() => {
-  //   getUsers();
-  // }, []);
+  const submit = () => {
+    const newUser = {
+      username: formValues.username.trim(),
+      password: formValues.password.trim(),
+      isAdmin: false
+    }
+    postNewUser(newUser)
+  }
 
-  // useEffect(() => {
-  //   formSchema.isValid(formValues).then((valid) => {
-  //     setDisabled(!valid);
-  //   });
-  // }, [formValues]);
+  useEffect(() => {
+    formSchema.isValid(formValues)
+      .then(valid => {
+        setDisabled(!valid);
+      })
+  }, [formValues])
 
   return (
     <div className="App">
-      <Route path="/">
-        <NavLink to="/signup">Sign Up</NavLink>
-        <NavLink component={Login} to="/login">
-          Log In
-        </NavLink>
-        {/* <SignUp
-          values={formValues}
-          inputChange={inputChange}
-          submit={submit}
-          disabled={disabled}
-          errors={formErrors}
-        /> */}
-      </Route>
-    </div>
+      <NavLink to="/signup">Sign Up</NavLink>
+      <NavLink to="/login" />
+      <Switch>
+        <Route exact path="/">
+          <Login />
+        </Route>
+        <Route path='/signup'>
+          <SignUp
+            values={formValues}
+            inputChange={inputChange}
+            submit={submit}
+            disabled={disabled}
+            errors={formErrors}
+          />
+        </Route>
+      </Switch>
+  </div>
   );
 }
 

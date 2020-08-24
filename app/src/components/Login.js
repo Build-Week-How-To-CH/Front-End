@@ -36,6 +36,7 @@ export const Login = () => {
         <NavLink to="/">Home</NavLink>
         <NavLink to="/signup">Sign Up</NavLink>
       </Route>
+      <h4>Login</h4>
       <form onSubmit={login}>
         <input
           name="username"
