@@ -30,9 +30,9 @@ function App() {
   const [disabled, setDisabled] = useState(initialDisabled)
 
   const getUsers = () => {
-    axios.get('https://bw-how-2.herokuapp.com/api/users')
+    axios.get('https://reqres.in/api/users')
       .then(res => {
-        console.log(res)
+        setUsers(res.data.data)
       })
       .catch(err => {
         debugger
@@ -40,9 +40,9 @@ function App() {
   }
 
   const postNewUser = newUser => {
-    axios.post('https://bw-how-2.herokuapp.com/api/users')
+    axios.post('https://reqres.in/api/users', newUser)
       .then(res => {
-        console.log(res)
+        setUsers([...users, res.data.data])
       })
       .catch(err => {
         debugger
@@ -61,6 +61,16 @@ function App() {
           ...formErrors,
           [name]: '',
         })
+      })
+      .catch(err => {
+        setFormErrors({
+          ...formErrors,
+          [name]:err.errors[0]
+        })
+      })
+      setFormValues({
+        ...formValues,
+        [name]:value
       })
   }
 
