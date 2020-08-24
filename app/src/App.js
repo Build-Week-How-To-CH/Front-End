@@ -23,26 +23,25 @@ const initialDisabled = true;
 
 function App() {
 
+  const [users, setUsers] = useState([])
   const [formValues, setFormValues] = useState(initialFormValues)
   const [formErrors, setFormErrors] = useState(initialFormErrors)
   const [disabled, setDisabled] = useState(initialDisabled)
 
-  // const getUsers = () => {
-  //   axios.get('https://bw-how-2.herokuapp.com/api/users')
-  //     .then(res => {
-  //       set
-  //     })
-  //     .catch(err => {
-  //       debugger
-  //     })
-  // }
+  const getUsers = () => {
+    axios.get('https://bw-how-2.herokuapp.com/api/users')
+      .then(res => {
+        setUsers(res.data.data)
+      })
+      .catch(err => {
+        debugger
+      })
+  }
 
   const postNewUser = newUser => {
     axios.post('https://bw-how-2.herokuapp.com/api/auth/register', newUser)
       .then(res => {
-        localStorage.setItem('token', res.data.token)
-        setFormValues(initialFormValues);
-        console.log(res.data)
+        setUsers([...setUsers, res.data.data])
       })
       .catch(err => {
         debugger
