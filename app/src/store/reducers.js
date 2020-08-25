@@ -1,12 +1,15 @@
-import { LOGIN_START, FETCH_LOGIN_SUCCESS } from "./actions";
-
+import { LOGIN_START, 
+  FETCH_LOGIN_SUCCESS, 
+  FETCH_HOWTOS_START,
+  FETCH_HOWTOS_SUCCESS, } from "./actions";
 
 const initialState = {
+  howTos: [],
   isLoading: false,
   data: "",
 };
 
-const reducer = (state = initialState, action) => {
+export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_START:
       return {
@@ -19,6 +22,21 @@ const reducer = (state = initialState, action) => {
         isLoading: false,
         data: action.payload,
       };
+      case FETCH_HOWTOS_START:
+        return {
+          ...state,
+          isLoading: true,
+          error: ''
+        }
+      case FETCH_HOWTOS_SUCCESS:
+        console.log(action.payload);
+        return {
+          ...state,
+          howTos: action.payload,
+          isLoading: false,
+        }
+        default:
+        return state
   }
 
   
