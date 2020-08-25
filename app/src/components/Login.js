@@ -2,13 +2,15 @@ import React, {useState} from "react";
 import { NavLink, useHistory, Route } from "react-router-dom";
 // import { axiosWithAuth } from "../utils/axiosWithAuth";
 import axios from "axios"
+import { connect } from "react-redux";
+import {setUserId} from "../store/actions"
 
 const initialState = {
   username: "",
   password: "",
 };
 
-export const Login = () => {
+export const Login = (props) => {
   const [creds, setCreds] = useState(initialState);
   const history = useHistory();
 
@@ -24,7 +26,8 @@ export const Login = () => {
     axios
       .post("https://bw-how-2.herokuapp.com/api/auth/login", creds) //need to add an endpoint
       .then((res) => {
-        console.log(res.data);
+        // console.log(res);
+        // props.setUserId(res.data.user.id);
         localStorage.setItem("token", res.data.token);
         history.push("/dashboard"); //endpoint for dashboard
       })
@@ -60,3 +63,11 @@ export const Login = () => {
     </div>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    user_id:state.user_id,
+  };
+};
+
+export default connect(mapStateToProps, {setUserId})(Login);

@@ -4,6 +4,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios"
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const initialFormValues = {
     title: '',
@@ -27,13 +28,14 @@ export default function HowToForm(props) {
         const postData = {
           title: formValues.title,
           category: formValues.category,
-          content: formValues.content
+          content: formValues.content,
+          user_id: 1,
         };
-        axios
+        axiosWithAuth()
           .post("https://bw-how-2.herokuapp.com/api/howtos", postData)
           .then((res) => {
             props.getHowTosList();
-            history.push("/");
+            history.push("/dashboard");
           })
           .catch((error) => console.log(error));
       };
@@ -41,38 +43,39 @@ export default function HowToForm(props) {
   return (
     <div>
       <form>
-        <label htmlFor="username">Title:&nbsp;</label>
         <input
           type="text"
           id="name"
           name="name"
           value={formValues.name}
           onChange={handleChange}
+          placeholder="Title"
         />
         <br />
         <br />
-        <label htmlFor="category">Category:&nbsp;</label>
         <input
           type="text"
           id="category"
           name="category"
           value={formValues.category}
           onChange={handleChange}
+          placeholder="Category"
         />
         <br />
         <br />
-        <label htmlFor="steps">Content:&nbsp;</label>
         <textarea
-          id="conent"
+          id="content"
           name="content"
           value={formValues.content}
           onChange={handleChange}
+          placeholder="Content"
         />
         <br />
         <br />
-        <button>Save Changes</button>&nbsp;
+        <button onClick={postNewHowTo}>Save Changes</button>&nbsp;
         <button>Cancel</button>
       </form>
+      
     </div>
   );
 }
