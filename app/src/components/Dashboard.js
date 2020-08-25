@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { axiosWithAuth } from "../utils/axiosWithAuth"
 import { fetchHowTos } from "../store/actions"
 import HowToCard from "./HowToCard";
+import HowToForm from "./HowToForm"
 
 //USER DASHBOARD NO FORM
 
@@ -31,6 +32,7 @@ const Dashboard = (props) => {
         <br></br>
       </div>
       <HowToCard />
+      <HowToForm />
     </>
   );
 };
