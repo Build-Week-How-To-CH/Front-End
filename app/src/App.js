@@ -8,6 +8,7 @@ import formSchema from "./components/FormSchema";
 import { Login } from "./components/Login";
 // import { axiosWithAuth } from './utils/axiosWithAuth';
 import Dashboard from './components/Dashboard'
+import styled from 'styled-components'
 
 // SIGNUP
 
@@ -125,7 +126,7 @@ const App =() => {
           <Dashboard />
         </Route>
       </Switch>
-  </div>
+    </div>
   );
 }
 
