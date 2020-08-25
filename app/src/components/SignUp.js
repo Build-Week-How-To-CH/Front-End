@@ -2,6 +2,21 @@ import React from "react";
 import { NavLink, Route, useHistory } from "react-router-dom";
 import styled from 'styled-components';
 
+  // Styling
+  
+  const StyledDiv = styled.div`
+    background-color:	rgb(232, 232, 228);
+    border-bottom:2px solid black;
+  `
+
+  const StyledLink = styled.div`
+  margin-bottom:1%;
+  `
+
+  const StyledHeading = styled.h4`
+  font-family:'Cherry Swash';
+  `
+
 
 function SignUp(props) {
   const { values, submit, inputChange, disabled, errors } = props;
@@ -28,21 +43,6 @@ function SignUp(props) {
     e.target.style.color = 'black';
   }
 
-  // Styling
-  
-  const StyledDiv = styled.div`
-    background-color:	rgb(232, 232, 228);
-    border-bottom:2px solid black;
-  `
-
-  const StyledLink = styled.div`
-  margin-bottom:1%;
-  `
-
-  const StyledHeading = styled.h4`
-  font-family:'Cherry Swash';
-  `
-
 
 
 
@@ -52,7 +52,6 @@ function SignUp(props) {
           <NavLink to="/" onMouseOver={changeColor} onMouseOut={changeColorBack}>Home</NavLink>
           <form className="form container" onSubmit={onSubmit}>
             <div className="errors">
-              <div>{errors.email}</div>
               <div>{errors.username}</div>
               <div>{errors.password}</div>
             </div>
