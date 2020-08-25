@@ -5,11 +5,11 @@ export const FETCH_LOGIN_SUCCESS = 'FETCH_LOGIN_SUCCESS'
 
 export const FETCH_HOWTOS_START = 'FETCH_HOWTOS_START'
 export const FETCH_HOWTOS_SUCCESS = 'FETCH_HOWTOS_SUCCESS'
+export const SET_USER_ID = 'SET_USER_ID'
 
 export const fetchHowTos = (id) => {
   return (dispatch) => {
     dispatch({ type: LOGIN_START });
-
     axiosWithAuth()
       .get(`${id}`)//need to add an endpoint
       .then((res) => {
@@ -25,9 +25,9 @@ export const signUp = client => {
   return dispatch => {
     dispatch({type: LOGIN_START})
     axiosWithAuth()
-    .post('', client)//need an endpoint, might need 2, one for creator, one for user
+    .post('', client) //need an endpoint, might need 2, one for creator, one for user
     .then(res => {
-      console.log(res)
+      // console.log(res)
       dispatch({type: FETCH_LOGIN_SUCCESS, payload: res.data})
       localStorage.setItem('token', res.token)
     })
@@ -51,11 +51,8 @@ export const fetchStudents = () => (dispatch) => {
     .catch(err => console.log(err))
 }
 
-const thunk = (store) => (next) => (action) => {
-  if (typeof action === "object") {
-      next(action)
-  } else if (typeof action === "function") {
-      action(store.dispatch)
-  }
-};
-
+export const setUserId = (props) => (dispatch) => {
+  dispatch({
+    type: SET_USER_ID, payload:props.id
+  })
+}
