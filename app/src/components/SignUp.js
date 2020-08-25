@@ -1,6 +1,8 @@
 import React from "react";
 import { NavLink, Route, useHistory } from "react-router-dom";
 import styled from 'styled-components';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
   // Styling
   
@@ -11,6 +13,7 @@ import styled from 'styled-components';
 
   const StyledLink = styled.div`
   margin-bottom:1%;
+  margin-top:1%;
   `
 
   const StyledHeading = styled.h4`
@@ -59,27 +62,23 @@ function SignUp(props) {
             <div className="inputs">
               <StyledHeading><h4>Sign Up</h4></StyledHeading>
 
-              <label>
-                Username:&nbsp;
-                <input
+              <TextField
                   value={values.username}
                   onChange={onInputChange}
                   name="username"
                   type="text"
-                />
-              </label>
+                  label='username'
+              />
 
-              <label>
-                Password:&nbsp;
-                <input
+              <TextField
                   value={values.password}
                   onChange={onInputChange}
-                  name="password"
+                  name= "password"
                   type="password"
+                  label='password'
                 />
-              </label>
 
-              <button disabled={disabled}>Sign me up!</button>
+              <Button variant="contained" color="primary" type="submit">Sign me up!</Button>
               <br></br>
               <StyledLink>
                 <div className="makeLink" onClick={() => history.push("/")} onMouseOver = {changeColor} onMouseOut = {changeColorBack}>
