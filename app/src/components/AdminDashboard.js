@@ -1,10 +1,11 @@
 import React, { useState, useEffect} from "react";
 import { connect } from "react-redux";
+import HowToForm from "./HowToForm";
 import { axiosWithAuth } from "../utils/axiosWithAuth"
 import { fetchHowTos } from "../store/actions"
 import HowToCard from "./HowToCard";
 
-//USER DASHBOARD NO FORM
+// ADMIN DASHBOARD -- FORM
 
 const Dashboard = (props) => {
   const [howToList, setHowToList] = useState([]);
@@ -18,7 +19,7 @@ const Dashboard = (props) => {
       });
   }, []);
 
-  // console.log('My ID is', props.user_id)
+  console.log('My ID is', props.user_id)
   
   return (
     <>
@@ -28,8 +29,8 @@ const Dashboard = (props) => {
         {howToList.map((ht) => {
           return <div key={ht.id}>{ht.title}</div>;
         })}
-        <br></br>
       </div>
+      <HowToForm />
       <HowToCard />
     </>
   );

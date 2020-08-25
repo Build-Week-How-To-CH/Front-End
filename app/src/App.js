@@ -26,10 +26,7 @@ const initialFormErrors = {
 
 const initialDisabled = true;
 
-
 const App = () => {
-
-
   const [users, setUsers] = useState([])
 
   const [formValues, setFormValues] = useState(initialFormValues);
@@ -93,7 +90,6 @@ const App = () => {
       username: formValues.username.trim(),
       password: formValues.password.trim(),
       isAdmin: false,
-
     };
     postNewUser(newUser);
   };

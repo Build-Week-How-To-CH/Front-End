@@ -34,7 +34,6 @@ export default function HowToForm(props) {
           user_id: 1,
         };
         axiosWithAuth()
-
           .post("/api/howtos", postData)
           .then((res) => {
             console.log(res)
@@ -47,8 +46,6 @@ export default function HowToForm(props) {
   return (
     <div>
       <form onSubmit={postNewHowTo}>
-        <label htmlFor="username">Title:&nbsp;</label>
-
         <input
           type="text"
           id="name"

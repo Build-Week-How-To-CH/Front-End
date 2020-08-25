@@ -43,9 +43,6 @@ function SignUp(props) {
   font-family:'Cherry Swash';
   `
 
-
-
-
   return (
     <Route path="/signup">
       <StyledDiv>
@@ -79,7 +76,6 @@ function SignUp(props) {
                   type="password"
                 />
               </label>
-
               <button disabled={disabled}>Sign me up!</button>
               <br></br>
               <StyledLink>
