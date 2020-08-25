@@ -1,6 +1,28 @@
-import React from "react";
+import React, {useState} from "react";
 import { NavLink, Route, useHistory } from "react-router-dom";
 import styled from 'styled-components';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
+  // Styling
+  
+  const StyledDiv = styled.div`
+    background-color:	rgb(232, 232, 228);
+    border-bottom:2px solid black;
+  `
+
+  const StyledLink = styled.div`
+  margin-bottom:1%;
+  margin-top:1%;
+  `
+
+  const StyledHeading = styled.h4`
+  font-family:'Cherry Swash';
+  `
+
+  const StyledInputs = styled.div`
+    margin-bottom:.5%;
+  `
 
 
 function SignUp(props) {
@@ -28,20 +50,8 @@ function SignUp(props) {
     e.target.style.color = 'black';
   }
 
-  // Styling
-  
-  const StyledDiv = styled.div`
-    background-color:	rgb(232, 232, 228);
-    border-bottom:2px solid black;
-  `
 
-  const StyledLink = styled.div`
-  margin-bottom:1%;
-  `
 
-  const StyledHeading = styled.h4`
-  font-family:'Cherry Swash';
-  `
 
   return (
     <Route path="/signup">
@@ -49,7 +59,6 @@ function SignUp(props) {
           <NavLink to="/" onMouseOver={changeColor} onMouseOut={changeColorBack}>Home</NavLink>
           <form className="form container" onSubmit={onSubmit}>
             <div className="errors">
-              <div>{errors.email}</div>
               <div>{errors.username}</div>
               <div>{errors.password}</div>
             </div>
@@ -57,26 +66,25 @@ function SignUp(props) {
             <div className="inputs">
               <StyledHeading><h4>Sign Up</h4></StyledHeading>
 
-              <label>
-                Username:&nbsp;
-                <input
-                  value={values.username}
-                  onChange={onInputChange}
-                  name="username"
-                  type="text"
+              <StyledInputs>
+                <TextField
+                    value={values.username}
+                    onChange={onInputChange}
+                    name="username"
+                    type="text"
+                    label='username'
                 />
-              </label>
 
-              <label>
-                Password:&nbsp;
-                <input
-                  value={values.password}
-                  onChange={onInputChange}
-                  name="password"
-                  type="password"
+                <TextField
+                    value={values.password}
+                    onChange={onInputChange}
+                    name= "password"
+                    type="password"
+                    label='password'
                 />
-              </label>
-              <button disabled={disabled}>Sign me up!</button>
+              </StyledInputs>
+              <br></br>
+             <Button variant="contained" color="primary" type="submit" disabled = {disabled}>Sign me up!</Button>
               <br></br>
               <StyledLink>
                 <div className="makeLink" onClick={() => history.push("/")} onMouseOver = {changeColor} onMouseOut = {changeColorBack}>
