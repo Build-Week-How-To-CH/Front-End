@@ -6,6 +6,7 @@ import "./App.css";
 import SignUp from "./components/SignUp";
 import formSchema from "./components/FormSchema";
 import { Login } from "./components/Login";
+import { axiosWithAuth } from './utils/axiosWithAuth';
 
 // SIGNUP
 
@@ -39,14 +40,18 @@ function App() {
   }
 
   const postNewUser = newUser => {
-    axios.post('https://bw-how-2.herokuapp.com/api/auth/register', newUser)
+    axiosWithAuth()
+    .post('/api/auth/register', newUser)
       .then(res => {
-        setUsers([...setUsers, res.data.data])
+        localStorage.setItem('token', res.data.token)
+        setFormValues(initialFormValues);
+        console.log(res.data)
       })
       .catch(err => {
         debugger
       })
   }
+
 
   const inputChange = (name, value) => {
     yup
@@ -77,6 +82,10 @@ function App() {
     }
     postNewUser(newUser)
   }
+
+  useEffect(() => {
+    getUsers()
+  }, [])
 
   useEffect(() => {
     formSchema.isValid(formValues)
