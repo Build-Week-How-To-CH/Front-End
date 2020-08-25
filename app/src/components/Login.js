@@ -5,7 +5,6 @@ import axios from "axios";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
-// import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { connect } from "react-redux";
 import { setUserId } from "../store/actions";
 
