@@ -4,11 +4,13 @@ import { axiosWithAuth } from "../utils/axiosWithAuth"
 import { fetchHowTos } from "../store/actions"
 import HowToCard from "./HowToCard";
 import HowToForm from "./HowToForm"
+import { Link, useHistory } from "react-router-dom";
 
 //USER DASHBOARD NO FORM
 
 const Dashboard = (props) => {
   const [howToList, setHowToList] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     axiosWithAuth()
@@ -25,14 +27,18 @@ const Dashboard = (props) => {
     <>
       <div>
         <h1>Welcome to your How-To Dashboard</h1>
+        <h2>Create How-To:</h2>
+        <HowToForm />
         <h2>How-Tos:</h2>
-        {howToList.map((ht) => {
-          return <div key={ht.id}>{ht.title}</div>;
-        })}
+        {
+          howToList.map(ht => (
+          <Link key={ht.id} to={`/dashboard/${ht.id}`}> 
+            <HowToCard ht={ht} getHowTosList={props.getHowTosList}
+          />
+          </Link>
+          ))}
         <br></br>
       </div>
-      <HowToCard />
-      <HowToForm />
     </>
   );
 };

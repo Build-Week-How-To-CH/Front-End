@@ -16,8 +16,8 @@ const initialFormValues = {
 export default function HowToForm(props) {
   const [formValues, setFormValues] = useState(initialFormValues);
   const [formOpen, setFormOpen] = useState(false)
-  // const [howTo, setHowTo] = useState(null)
-  // const history = useHistory();
+  const [howTo, setHowTo] = useState(null)
+  const history = useHistory();
 
   const handleChange = (e) => {
     setFormValues({
