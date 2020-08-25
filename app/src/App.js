@@ -33,8 +33,10 @@ const App =() => {
 
   const getUsers = () => {
     axios.get('https://bw-how-2.herokuapp.com/api/users')
+    // axios.get('https://reqres.in/api/users')
       .then(res => {
         setUsers(res.data.data)
+        console.log(res.data)
       })
       .catch(err => {
         debugger
