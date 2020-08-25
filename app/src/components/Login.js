@@ -6,9 +6,9 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 // import { axiosWithAuth } from "../utils/axiosWithAuth";
-import axios from "axios"
+// import axios from "axios"
 import { connect } from "react-redux";
-import {setUserId} from "../store/actions"
+import {setUserId} from "../store/actions";
 
 
 const initialState = {
