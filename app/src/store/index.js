@@ -1,4 +1,4 @@
 
 export { reducer } from "./reducers";
-export { fetchHowTos } from "./actions";
+export { fetchHowTos, deleteHowTo } from "./actions";
 

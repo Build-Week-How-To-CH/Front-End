@@ -7,24 +7,23 @@ import SignUp from "./components/SignUp";
 import formSchema from "./components/FormSchema";
 import { Login } from "./components/Login";
 // import { axiosWithAuth } from './utils/axiosWithAuth';
-import Dashboard from './components/Dashboard'
+import Dashboard from "./components/Dashboard";
 
 // SIGNUP
 
 const initialFormValues = {
-  username: '',
-  password: '',
-}
+  username: "",
+  password: "",
+};
 
 const initialFormErrors = {
-  username: '',
-  password: '',
-}
+  username: "",
+  password: "",
+};
 
 const initialDisabled = true;
 
-const App =() => {
-
+const App = () => {
   const [formValues, setFormValues] = useState(initialFormValues);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
@@ -40,57 +39,56 @@ const App =() => {
   //     })
   // }
 
-  const postNewUser = newUser => {
+  const postNewUser = (newUser) => {
     axios
-    .post('https://bw-how-2.herokuapp.com/api/auth/register', newUser)
-      .then(res => {
-        console.log(res.data)
-        localStorage.setItem('token', res.data.token)
+      .post("https://bw-how-2.herokuapp.com/api/auth/register", newUser)
+      .then((res) => {
+        console.log(res.data);
+        localStorage.setItem("token", res.data.token);
         setFormValues(initialFormValues);
-        history.push('/dashboard')
+        history.push("/dashboard");
       })
-      .catch(err => {
-        console.log(err)
-      })
-  }
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const inputChange = (name, value) => {
     yup
       .reach(formSchema, name)
       .validate(value)
-      .then(valid => {
+      .then((valid) => {
         setFormErrors({
           ...formErrors,
-          [name]: '',
-        })
+          [name]: "",
+        });
       })
-      .catch(err => {
+      .catch((err) => {
         setFormErrors({
           ...formErrors,
-          [name]:err.errors[0]
-        })
-      })
-      setFormValues({
-        ...formValues,
-        [name]:value
-      })
-  }
+          [name]: err.errors[0],
+        });
+      });
+    setFormValues({
+      ...formValues,
+      [name]: value,
+    });
+  };
 
   const submit = () => {
     const newUser = {
       username: formValues.username.trim(),
       password: formValues.password.trim(),
-      isAdmin: false
-    }
-    postNewUser(newUser)
-  }
+      isAdmin: false,
+    };
+    postNewUser(newUser);
+  };
 
   useEffect(() => {
-    formSchema.isValid(formValues)
-      .then(valid => {
-        setDisabled(!valid);
-      })
-  }, [formValues])
+    formSchema.isValid(formValues).then((valid) => {
+      setDisabled(!valid);
+    });
+  }, [formValues]);
 
   return (
     <div className="App">
@@ -99,12 +97,12 @@ const App =() => {
       <h3>Returning Users</h3>
       <NavLink to="/login" />  */}
       {/* we can eventually add these to the nav bar for UNIT 1 ppl */}
-      
+
       <Switch>
         <Route exact path="/">
           <Login />
         </Route>
-        <Route path='/signup'>
+        <Route path="/signup">
           <SignUp
             values={formValues}
             inputChange={inputChange}
@@ -113,12 +111,12 @@ const App =() => {
             errors={formErrors}
           />
         </Route>
-        <Route path='/dashboard'>
+        <Route path="/dashboard">
           <Dashboard />
         </Route>
       </Switch>
-  </div>
+    </div>
   );
-}
+};
 
 export default App;

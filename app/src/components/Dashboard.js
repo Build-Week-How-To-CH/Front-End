@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import HowToForm from "./HowToForm";
 import { axiosWithAuth } from "../utils/axiosWithAuth"
 import { fetchHowTos } from "../store/actions"
-import { HowToCard } from "./HowToCard";
+import HowToCard from "./HowToCard";
 
 //DASHBOARD//HOW-TO'S LIST//How-To form?
 
