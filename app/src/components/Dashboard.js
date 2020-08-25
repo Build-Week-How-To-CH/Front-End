@@ -26,9 +26,6 @@ const Dashboard = (props) => {
       <div>
         <h1>Welcome to your How-To Dashboard</h1>
         <h2>How-Tos:</h2>
-        {howToList.map((ht) => {
-          return <div key={ht.id}>{ht.title}</div>;
-        })}
       </div>
       <HowToForm />
       <HowToCard />
