@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { NavLink, BrowserRouter, Route, Switch, useHistory } from "react-router-dom";
+import { NavLink, Route, Switch, useHistory } from "react-router-dom";
 import axios from "axios";
 import * as yup from "yup";
 import "./App.css";
 import SignUp from "./components/SignUp";
 import formSchema from "./components/FormSchema";
 import { Login } from "./components/Login";
-import { axiosWithAuth } from './utils/axiosWithAuth';
+// import { axiosWithAuth } from './utils/axiosWithAuth';
 import Dashboard from './components/Dashboard'
 
 // SIGNUP
@@ -23,7 +23,7 @@ const initialFormErrors = {
 
 const initialDisabled = true;
 
-export const App =() => {
+const App =() => {
 
   const [users, setUsers] = useState([])
   const [formValues, setFormValues] = useState(initialFormValues);
@@ -42,8 +42,8 @@ export const App =() => {
   }
 
   const postNewUser = newUser => {
-    axiosWithAuth()
-    .post('/api/auth/register', newUser)
+    axios
+    .post('https://bw-how-2.herokuapp.com/api/auth/register', newUser)
       .then(res => {
         console.log(res.data)
         localStorage.setItem('token', res.data.token)
@@ -105,7 +105,7 @@ export const App =() => {
       <h3>Returning Users</h3>
       <NavLink to="/login" />  */}
       {/* we can eventually add these to the nav bar for UNIT 1 ppl */}
-      <BrowserRouter>
+      
       <Switch>
         <Route exact path="/">
           <Login />
@@ -123,7 +123,6 @@ export const App =() => {
           <Dashboard />
         </Route>
       </Switch>
-      </BrowserRouter>
   </div>
   );
 }
