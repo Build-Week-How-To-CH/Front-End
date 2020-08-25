@@ -1,7 +1,7 @@
 // HOW-TO form create a new How-To 
 // ADD/SUBMIT functionality
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios"
 
@@ -40,12 +40,12 @@ export default function HowToForm(props) {
 
   return (
     <div>
-      <form>
+      <form onSubmit={postNewHowTo}>
         <label htmlFor="username">Title:&nbsp;</label>
         <input
           type="text"
           id="name"
-          name="name"
+          name="title"
           value={formValues.name}
           onChange={handleChange}
         />
