@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import { NavLink, useHistory, Route } from "react-router-dom";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
+// import { axiosWithAuth } from "../utils/axiosWithAuth";
+import axios from "axios"
 
 const initialState = {
   username: "",
@@ -20,8 +21,8 @@ export const Login = () => {
 
   const login = (e) => {
     e.preventDefault();
-    axiosWithAuth()
-      .post("/api/auth/login", creds) //need to add an endpoint
+    axios
+      .post("https://bw-how-2.herokuapp.com/api/auth/login", creds) //need to add an endpoint
       .then((res) => {
         console.log(res.data);
         localStorage.setItem("token", res.data.token);

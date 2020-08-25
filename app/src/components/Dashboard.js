@@ -1,22 +1,20 @@
 import React, { useState, useEffect} from "react";
 import { connect } from "react-redux";
 import HowToForm from "./HowToForm";
-import { useHistory } from "react-router-dom";
 import { axiosWithAuth } from "../utils/axiosWithAuth"
-import { fetchHowTos } from "../store"
+import { fetchHowTos } from "../store/actions"
 
 //DASHBOARD//HOW-TO'S LIST//How-To form?
 
 const Dashboard = () => {
-  const history = useHistory();
-
   const [howToList, setHowToList] = useState([]);
 
   useEffect(() => {
     axiosWithAuth()
       .get("https://bw-how-2.herokuapp.com/api/howtos")
       .then((response) => {
-        setHowToList(response.data.data);
+          console.log(response)
+        setHowToList(response.data.howtos);
       });
   }, []);
 
