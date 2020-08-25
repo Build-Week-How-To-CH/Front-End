@@ -8,6 +8,7 @@ import formSchema from "./components/FormSchema";
 import { Login } from "./components/Login";
 // import { axiosWithAuth } from './utils/axiosWithAuth';
 import Dashboard from './components/Dashboard'
+import styled from 'styled-components'
 
 // SIGNUP
 
@@ -25,20 +26,23 @@ const initialDisabled = true;
 
 const App =() => {
 
+  const [users, setUsers] = useState([])
   const [formValues, setFormValues] = useState(initialFormValues);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
   const history = useHistory();
 
-  // const getUsers = () => {
-  //   axios.get('https://bw-how-2.herokuapp.com/api/users')
-  //     .then(res => {
-  //       set
-  //     })
-  //     .catch(err => {
-  //       debugger
-  //     })
-  // }
+  const getUsers = () => {
+    axios.get('https://bw-how-2.herokuapp.com/api/users')
+    // axios.get('https://reqres.in/api/users')
+      .then(res => {
+        setUsers(res.data.data)
+        console.log(res.data)
+      })
+      .catch(err => {
+        debugger
+      })
+  }
 
   const postNewUser = newUser => {
     axios
@@ -54,6 +58,7 @@ const App =() => {
       })
   }
 
+
   const inputChange = (name, value) => {
     yup
       .reach(formSchema, name)
@@ -64,7 +69,7 @@ const App =() => {
           [name]: '',
         })
       })
-      .catch(err => {
+      .catch(err => { 
         setFormErrors({
           ...formErrors,
           [name]:err.errors[0]
@@ -80,10 +85,14 @@ const App =() => {
     const newUser = {
       username: formValues.username.trim(),
       password: formValues.password.trim(),
-      isAdmin: false
+      isAdmin: false,
     }
     postNewUser(newUser)
   }
+
+  useEffect(() => {
+    getUsers()
+  }, [])
 
   useEffect(() => {
     formSchema.isValid(formValues)
@@ -117,7 +126,7 @@ const App =() => {
           <Dashboard />
         </Route>
       </Switch>
-  </div>
+    </div>
   );
 }
 
