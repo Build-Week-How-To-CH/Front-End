@@ -1,7 +1,8 @@
 import React, {useState} from "react";
 import { NavLink, useHistory, Route } from "react-router-dom";
-// import { axiosWithAuth } from "../utils/axiosWithAuth";
-import axios from "axios"
+import axios from "axios";
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 const initialState = {
   username: "",
@@ -39,21 +40,23 @@ export const Login = () => {
       </Route>
       <h4>Login</h4>
       <form onSubmit={login}>
-        <input
+        <TextField
+          variant="outlined"
           name="username"
           type="text"
-          placeholder="Username"
+          label="Username"
           value={creds.username}
           onChange={handleChange}
         />
-        <input
+        <TextField
+          variant="outlined"
           name="password"
           type="password"
-          placeholder="Password"
+          label="Password"
           value={creds.password}
           onChange={handleChange}
         />
-        <button>Log In</button>
+        <Button variant="contained" color="primary" type="submit">Log In</Button>
         <br></br>
         <div className="makeLink" onClick={() => history.push('/signup')}>Don't have an account? Click to sign up.</div>
       </form>
