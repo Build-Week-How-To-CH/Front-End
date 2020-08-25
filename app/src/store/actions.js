@@ -3,7 +3,10 @@ import { axiosWithAuth } from "../utils/axiosWithAuth";
 export const LOGIN_START = 'LOGIN_START'
 export const FETCH_LOGIN_SUCCESS = 'FETCH_LOGIN_SUCCESS'
 
-export const fetchHowTos = () => {
+export const FETCH_HOWTOS_START = 'FETCH_HOWTOS_START'
+export const FETCH_HOWTOS_SUCCESS = 'FETCH_HOWTOS_SUCCESS'
+
+export const fetchHowTos = (id) => {
   return (dispatch) => {
     dispatch({ type: LOGIN_START });
 
@@ -32,4 +35,27 @@ export const signUp = client => {
   }
 }
 
+export const fetchStudents = () => (dispatch) => {
+  dispatch({
+      type: FETCH_HOWTOS_START
+    })
+  axiosWithAuth()
+    .get('/api/howtos')
+    .then(res => {
+      dispatch({ 
+          type: FETCH_HOWTOS_SUCCESS, 
+          payload: res.data.data
+        })
+      console.log(res);
+    })
+    .catch(err => console.log(err))
+}
+
+const thunk = (store) => (next) => (action) => {
+  if (typeof action === "object") {
+      next(action)
+  } else if (typeof action === "function") {
+      action(store.dispatch)
+  }
+};
 
