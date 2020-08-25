@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { NavLink, Route, useHistory } from "react-router-dom";
 import styled from 'styled-components';
 import TextField from '@material-ui/core/TextField';
@@ -18,6 +18,10 @@ import Button from '@material-ui/core/Button';
 
   const StyledHeading = styled.h4`
   font-family:'Cherry Swash';
+  `
+
+  const StyledInputs = styled.div`
+    margin-bottom:.5%;
   `
 
 
@@ -62,23 +66,25 @@ function SignUp(props) {
             <div className="inputs">
               <StyledHeading><h4>Sign Up</h4></StyledHeading>
 
-              <TextField
-                  value={values.username}
-                  onChange={onInputChange}
-                  name="username"
-                  type="text"
-                  label='username'
-              />
-
-              <TextField
-                  value={values.password}
-                  onChange={onInputChange}
-                  name= "password"
-                  type="password"
-                  label='password'
+              <StyledInputs>
+                <TextField
+                    value={values.username}
+                    onChange={onInputChange}
+                    name="username"
+                    type="text"
+                    label='username'
                 />
 
-              <Button variant="contained" color="primary" type="submit">Sign me up!</Button>
+                <TextField
+                    value={values.password}
+                    onChange={onInputChange}
+                    name= "password"
+                    type="password"
+                    label='password'
+                />
+              </StyledInputs>
+              <br></br>
+             <Button variant="contained" color="primary" type="submit" disabled = {disabled}>Sign me up!</Button>
               <br></br>
               <StyledLink>
                 <div className="makeLink" onClick={() => history.push("/")} onMouseOver = {changeColor} onMouseOut = {changeColorBack}>
