@@ -3,13 +3,15 @@ import { axiosWithAuth } from "../utils/axiosWithAuth";
 export const LOGIN_START = "LOGIN_START";
 export const FETCH_LOGIN_SUCCESS = "FETCH_LOGIN_SUCCESS";
 
-export const FETCH_HOWTOS_START = "FETCH_HOWTOS_START";
-export const FETCH_HOWTOS_SUCCESS = "FETCH_HOWTOS_SUCCESS";
+
+export const FETCH_HOWTOS_START = 'FETCH_HOWTOS_START'
+export const FETCH_HOWTOS_SUCCESS = 'FETCH_HOWTOS_SUCCESS'
+export const SET_USER_ID = 'SET_USER_ID'
+
 
 export const fetchHowTos = (id) => {
   return (dispatch) => {
     dispatch({ type: LOGIN_START });
-
     axiosWithAuth()
       .get(`/api/howtos`) //need to add an endpoint
       .then((res) => {
@@ -35,6 +37,7 @@ export const signUp = (client) => {
   };
 };
 
+
 export const fetchStudents = () => (dispatch) => {
   dispatch({
     type: FETCH_HOWTOS_START,
@@ -51,6 +54,7 @@ export const fetchStudents = () => (dispatch) => {
     .catch((err) => console.log(err));
 };
 
+
 export const DELETE_HOW_TO = "DELETE_HOW_TO";
 export const DELETE_HOW_TO_SUCCESS = "DELETE_HOW_TO_SUCCESS";
 export const DELETE_HOW_TO_FAILURE = "DELETE_HOW_TO_FAILURE";
@@ -66,7 +70,13 @@ export const deleteHowTo = (id) => (dispatch) => {
     dispatch({ type: DELETE_HOW_TO_FAILURE, payload: err.message})
   })
 };
-  
+
+export const setUserId = (props) => (dispatch) => {
+  dispatch({
+    type: SET_USER_ID, payload:props.id
+  })
+}
+
 const thunk = (store) => (next) => (action) => {
   if (typeof action === "object") {
     next(action);
@@ -74,3 +84,4 @@ const thunk = (store) => (next) => (action) => {
     action(store.dispatch);
   }
 };
+

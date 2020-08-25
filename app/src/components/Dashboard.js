@@ -7,7 +7,7 @@ import HowToCard from "./HowToCard";
 
 //DASHBOARD//HOW-TO'S LIST//How-To form?
 
-const Dashboard = () => {
+const Dashboard = (props) => {
   const [howToList, setHowToList] = useState([]);
 
   useEffect(() => {
@@ -19,6 +19,8 @@ const Dashboard = () => {
       });
   }, []);
 
+  console.log('My ID is', props.user_id)
+  
   return (
     <>
       <div>
@@ -35,10 +37,13 @@ const Dashboard = () => {
 };
 
 const mapStateToProps = (state) => {
+
   return {
     howTos: state.howTos,
     isLoading: state.isLoading,
+    data: state.data,
     error: state.error,
+    user_id:state.user_id,
   };
 };
 
