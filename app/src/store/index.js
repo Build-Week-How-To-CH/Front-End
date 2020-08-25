@@ -1,4 +1,5 @@
 
 export { reducer } from "./reducers";
-export { fetchHowTos, setUserId } from "./actions";
+export { fetchHowTos, deleteHowTo, setUserId } from "./actions";
+
 

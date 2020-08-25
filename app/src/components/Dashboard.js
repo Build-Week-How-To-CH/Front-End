@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import HowToForm from "./HowToForm";
 import { axiosWithAuth } from "../utils/axiosWithAuth"
 import { fetchHowTos } from "../store/actions"
+import HowToCard from "./HowToCard";
 
 //DASHBOARD//HOW-TO'S LIST//How-To form?
 
@@ -26,10 +27,11 @@ const Dashboard = (props) => {
         <h1>Welcome to your How-To Dashboard</h1>
         <h2>How-Tos:</h2>
         {howToList.map((ht) => {
-          return <div>{ht.title}</div>;
+          return <div key={ht.id}>{ht.title}</div>;
         })}
       </div>
       <HowToForm />
+      <HowToCard />
     </>
   );
 };

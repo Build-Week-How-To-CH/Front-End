@@ -4,7 +4,9 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios"
-import { axiosWithAuth } from "../utils/axiosWithAuth";
+
+import {axiosWithAuth} from '../utils/axiosWithAuth'
+
 
 const initialFormValues = {
     title: '',
@@ -32,17 +34,18 @@ export default function HowToForm(props) {
           user_id: 1,
         };
         axiosWithAuth()
-          .post("https://bw-how-2.herokuapp.com/api/howtos", postData)
+
+          .post("/api/howtos", postData)
           .then((res) => {
+            console.log(res)
             props.getHowTosList();
-            history.push("/dashboard");
+            setFormValues(res.data)
+            // history.push("/");
           })
           .catch((error) => console.log(error));
       };
-
   return (
     <div>
-
       <form onSubmit={postNewHowTo}>
         <label htmlFor="username">Title:&nbsp;</label>
 
