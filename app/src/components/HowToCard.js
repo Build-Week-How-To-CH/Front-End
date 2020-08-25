@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { connect } from "react-redux";
 import { deleteHowTo } from "../store/actions";
+import { useHistory } from "react-router-dom";
 
 const initialCard = {
   title: "",
@@ -17,39 +18,36 @@ const HowToCard = (props) => {
   const [howTos, setHowTos] = useState([]);
   const [edit, setEdit] = useState(false);
   const [cardToEdit, setCardToEdit] = useState(initialCard);
+  const history = useHistory()
 
   const editCard = (card) => {
     setEdit(true);
     setCardToEdit(card);
   };
-  console.log(cardToEdit.id);
+
   const saveEdit = (e) => {
     e.preventDefault();
     axiosWithAuth()
-      .put(`/api/howtos/${cardToEdit.id}`, cardToEdit)
+      .put(`/api/howtos/${e.id}`, cardToEdit)
       .then((res) => {
         setEdit(false);
         setCardToEdit(initialCard);
       })
       .catch((err) => err);
+
   };
 
   const deleteCard = (e) => {
     axiosWithAuth()
       .delete(`/api/howtos/${e.id}`)
       .then((res) => {
-        console.log(res);
         setEdit(false);
         setCardToEdit(initialCard);
+        
       })
       .catch((err) => console.log(err, "lol"));
   };
 
-  // const deleteHowTo = e => {
-  //   e.preventDefault()
-  //   console.log(props.id)
-  //   props.deleteHowTo(howTos.id)
-  // }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -66,11 +64,10 @@ const HowToCard = (props) => {
     axiosWithAuth()
       .get(`/api/howtos`)
       .then((res) => {
-        console.log(res.data.howtos);
         setHowTos(res.data.howtos);
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [howTos, edit, cardToEdit]);
   return (
     <div>
       {howTos.map((toes) => (

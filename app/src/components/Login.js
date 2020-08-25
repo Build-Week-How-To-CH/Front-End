@@ -1,15 +1,13 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { NavLink, useHistory, Route } from "react-router-dom";
 
 import axios from "axios";
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 
 // import { axiosWithAuth } from "../utils/axiosWithAuth";
-// import axios from "axios"
 import { connect } from "react-redux";
-import {setUserId} from "../store/actions";
-
+import { setUserId } from "../store/actions";
 
 const initialState = {
   username: "",
@@ -64,18 +62,22 @@ export const Login = (props) => {
           value={creds.password}
           onChange={handleChange}
         />
-        <Button variant="contained" color="primary" type="submit">Log In</Button>
+        <Button variant="contained" color="primary" type="submit">
+          Log In
+        </Button>
         <br></br>
-        <div className="makeLink" onClick={() => history.push('/signup')}>Don't have an account? Click to sign up.</div>
+        <div className="makeLink" onClick={() => history.push("/signup")}>
+          Don't have an account? Click to sign up.
+        </div>
       </form>
     </div>
   );
-}
+};
 
 const mapStateToProps = (state) => {
   return {
-    user_id:state.user_id,
+    user_id: state.user_id,
   };
 };
 
-export default connect(mapStateToProps, {setUserId})(Login);
+export default connect(mapStateToProps, { setUserId })(Login);
