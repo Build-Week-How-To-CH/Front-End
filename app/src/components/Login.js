@@ -25,7 +25,7 @@ export const Login = () => {
       .then((res) => {
         console.log(res.data);
         localStorage.setItem("token", res.data.token);
-        history.push("/"); //endpoint for dashboard
+        history.push("/dashboard"); //endpoint for dashboard
       })
       .catch((err) => err);
   };
@@ -53,6 +53,8 @@ export const Login = () => {
           onChange={handleChange}
         />
         <button>Log In</button>
+        <br></br>
+        <div className="makeLink" onClick={() => history.push('/signup')}>Don't have an account? Click to sign up.</div>
       </form>
     </div>
   );

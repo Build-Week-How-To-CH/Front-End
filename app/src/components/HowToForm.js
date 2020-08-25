@@ -1,97 +1,77 @@
-import React from "react";
+//HOW-TO form create a new How-To // ADD/SUBMIT functionality
 
-const initialFormValues = {
-    title: '',
-    category: '',
-    content: ''
-}
+// import React, { useState } from "react";
+// import { useHistory } from "react-router-dom";
+// import axios from "axios"
 
-export default function HowToForm() {
+// const initialFormValues = {
+//     title: '',
+//     category: '',
+//     content: '',
+// }
 
-    const [error, setError] = useState('');
-    const [formValues, setFormValues] = useState(initialFormValues);
-    const [formOpen, setFormOpen] = useState(false);
-    const [disabled, setDisabled] = useState(true);
+// export default function HowToForm(props) {
+//     const [formValues, setFormValues] = useState(initialFormValues);
+//     const history = useHistory();
 
-    const onInputChange = e => {
-        e.preventDefault();
-        const { name, value } = e.target;
-        setFormValues({
-            ...formValues,
-            [name]: value
-        })
-        setDisabled(checkForRequiredFields());
-    }
+//     const handleChange = (e) => {
+//       setFormValues({
+//         ...formValues,
+//         [e.target.name]: e.target.value,
+//       });
+//     };
 
-    const checkForRequiredFields = () => {
-        const { name, description, steps, category } = formValues;
-        if (title !== '' && category !== '' && content !== '') {
-            setError('');
-            return false;
-        }else {
-            setError('Please fill out all required fields');
-            return true;
-        }
-    }
+//     const postNewHowTo = (e) => {
+//         e.preventDefault();
+//         const postData = {
+//           title: formValues.title,
+//           category: formValues.category,
+//           content: formValues.content
+//         };
+//         axios
+//           .post("https://bw-how-2.herokuapp.com/api/howtos", postData)
+//           .then((res) => {
+//             props.getHowTosList();
+//             history.push("/");
+//           })
+//           .catch((error) => console.log(error));
+//       };
 
-    const openForm = () => {
-        setFormOpen(true);
-    }
-
-    const closeForm = () => {
-        setFormOpen(false);
-        setFormValues(initialFormValues);
-    }
-
-    const addHowTo = e => {
-        e.preventDefault();
-        axiosWithAuth()
-            .post('/api/howtos', formValues) 
-            .then(res => {
-                console.log(res);
-                setHowTos([...howTos, res.data]);
-            })
-            .catch(err => {
-                console.log(err.response);
-            })
-        closeForm();
-    }
-
-  return (
-    <div>
-      <form>
-        <label htmlFor="username">Title:&nbsp;</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={formValues.name}
-          onChange={onInputChange}
-        />
-        <br />
-        <br />
-        <label htmlFor="category">Category:&nbsp;</label>
-        <input
-          type="text"
-          id="category"
-          name="category"
-          value={formValues.category}
-          onChange={onInputChange}
-        />
-        <br />
-        <br />
-        <label htmlFor="steps">Content:&nbsp;</label>
-        <textarea
-          id="conent"
-          name="content"
-          value={formValues.content}
-          onChange={onInputChange}
-        />
-        <br />
-        <br />
-        <button>Save Changes</button>&nbsp;
-        <button>Cancel</button>
-      </form>
-    </div>
-  );
-}
+//   return (
+//     <div>
+//       <form>
+//         <label htmlFor="username">Title:&nbsp;</label>
+//         <input
+//           type="text"
+//           id="name"
+//           name="name"
+//           value={formValues.name}
+//           onChange={handleChange}
+//         />
+//         <br />
+//         <br />
+//         <label htmlFor="category">Category:&nbsp;</label>
+//         <input
+//           type="text"
+//           id="category"
+//           name="category"
+//           value={formValues.category}
+//           onChange={handleChange}
+//         />
+//         <br />
+//         <br />
+//         <label htmlFor="steps">Content:&nbsp;</label>
+//         <textarea
+//           id="conent"
+//           name="content"
+//           value={formValues.content}
+//           onChange={handleChange}
+//         />
+//         <br />
+//         <br />
+//         <button>Save Changes</button>&nbsp;
+//         <button>Cancel</button>
+//       </form>
+//     </div>
+//   );
+// }

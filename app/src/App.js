@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { NavLink, Route, Switch, useHistory } from "react-router-dom";
+import { NavLink, BrowserRouter, Route, Switch, useHistory } from "react-router-dom";
 import axios from "axios";
 import * as yup from "yup";
 import "./App.css";
@@ -23,7 +23,7 @@ const initialFormErrors = {
 
 const initialDisabled = true;
 
-function App() {
+export const App =() => {
 
   const [formValues, setFormValues] = useState(initialFormValues);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
@@ -44,13 +44,13 @@ function App() {
     axiosWithAuth()
     .post('/api/auth/register', newUser)
       .then(res => {
+        console.log(res.data)
         localStorage.setItem('token', res.data.token)
         setFormValues(initialFormValues);
         history.push('/dashboard')
-        console.log(res.data)
       })
       .catch(err => {
-        debugger
+        console.log(err)
       })
   }
 
@@ -94,12 +94,12 @@ function App() {
 
   return (
     <div className="App">
-      <h3>New here? </h3>
+      {/* <h3>New here? </h3>
       <NavLink to="/signup"> Create a Account!</NavLink>
       <h3>Returning Users</h3>
-      <NavLink to="/login" /> 
+      <NavLink to="/login" />  */}
       {/* we can eventually add these to the nav bar for UNIT 1 ppl */}
-
+      <BrowserRouter>
       <Switch>
         <Route exact path="/">
           <Login />
@@ -117,7 +117,7 @@ function App() {
           <Dashboard />
         </Route>
       </Switch>
-
+      </BrowserRouter>
   </div>
   );
 }

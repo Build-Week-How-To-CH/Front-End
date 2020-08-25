@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react'
-import { axiosWithAuth } from '../utils/axiosWithAuth'
-
 //SINGLE HOW-TO
 // edit / delete functionality here
+
+import React, {useState, useEffect} from 'react'
+import { axiosWithAuth } from '../utils/axiosWithAuth'
 
 export const HowToCard = () => {
   const [howTo, setHowTo] = useState(null)
