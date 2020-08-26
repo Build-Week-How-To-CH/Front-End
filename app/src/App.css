@@ -58,3 +58,25 @@ body {
 #linksDash:hover {
   color:rgba(128, 128, 128, 0.589) ;
 }
+
+.form-container {
+  display: flex;
+  padding: 12% 0 0 0;
+}
+
+.form-container-bb {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-container-bb input {
+  padding: 1%;
+  margin: 1%;
+}
+
+.edit-button {
+  margin: 1%;
+}
