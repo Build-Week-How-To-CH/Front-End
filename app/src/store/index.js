@@ -1,5 +1,4 @@
 
-export { reducer } from "./reducers";
-export { fetchHowTos, deleteHowTo, setUserId } from "./actions";
-
+export { reducer } from "./reducers.js";
+export { fetchHowTos, deleteHowTo, setUserId, xyz} from "./actions.js";
 

@@ -87,7 +87,6 @@ const HowToCard = (props) => {
             console.log('Here', ht)
             return (
               <Link id="linksDash" key={ht.id} to={`/howtos/${ht.id}`}>
-                <HowTo howto={ht} />
                 <h2>{ht.title}</h2>
                 <h3>{ht.category}</h3>
                 <button
