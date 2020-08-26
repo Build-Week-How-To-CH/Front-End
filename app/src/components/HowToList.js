@@ -16,7 +16,7 @@ const initialCard = {
   id: "",
 };
 
-const HowToCard = (props) => {
+const HowToList= (props) => {
   const [howTos, setHowTos] = useState([]);
   const [edit, setEdit] = useState(false);
   const [cardToEdit, setCardToEdit] = useState(initialCard);
@@ -25,7 +25,7 @@ const HowToCard = (props) => {
 
   useEffect(() => {
     axiosWithAuth()
-      .get("https://bw-how-2.herokuapp.com/api/howtos")
+      .get("/api/howtos")
       .then((response) => {
         // console.log(response);
         setHowToList(response.data.howtos);
@@ -158,4 +158,4 @@ const HowToCard = (props) => {
   );
 };
 
-export default connect(null, { deleteHowTo })(HowToCard);
+export default connect(null, { deleteHowTo })(HowToList);
