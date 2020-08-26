@@ -68,3 +68,12 @@ export const setUserId = (props) => (dispatch) => {
     type: SET_USER_ID, payload:props.id
   })
 }
+
+export const EDIT_HOWTO = 'EDIT_HOWTO'
+export const EDIT_HOWTOSUCCESS = 'EDIT_HOWTOSUCCESS'
+
+// export const editHowTo = id => dispatch => {
+//   dispatch({type: EDIT_HOWTO})
+//   axiosWithAuth()
+//   .put(`/api/howtos/${id}`, payload)
+// }

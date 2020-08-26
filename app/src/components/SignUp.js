@@ -12,12 +12,17 @@ const StyledDiv = styled.div`
 `;
 
 const StyledLink = styled.div`
+  margin-top:1%;
   margin-bottom: 1%;
 `;
 
 const StyledHeading = styled.h4`
   font-family: "Cherry Swash";
 `;
+
+const StyledButton = styled.div`
+  margin-top:1%;
+`
 
 function SignUp(props) {
   const { values, submit, inputChange, disabled, errors } = props;
@@ -62,27 +67,23 @@ function SignUp(props) {
               <h4>Sign Up</h4>
             </StyledHeading>
 
-            <label>
-              Username:&nbsp;
-              <input
+              <TextField
                 value={values.username}
                 onChange={onInputChange}
                 name="username"
                 type="text"
+                label = "Username"
               />
-            </label>
 
-            <label>
-              Password:&nbsp;
-              <input
+              <TextField
                 value={values.password}
                 onChange={onInputChange}
                 name="password"
                 type="password"
+                label="Password"
               />
-            </label>
 
-            <button disabled={disabled}>Sign me up!</button>
+            <StyledButton><Button variant = 'contained' color = 'primary' disabled={disabled}>Sign me up!</Button></StyledButton>
             <br></br>
             <StyledLink>
               <div

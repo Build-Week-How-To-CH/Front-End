@@ -38,6 +38,16 @@ export const Login = (props) => {
       .catch((err) => err);
   };
 
+  // Event listeners
+
+  function changeColor(e) {
+    e.target.style.color = "#000099";
+  }
+
+  function changeColorBack(e) {
+    e.target.style.color = "black";
+  }
+
   return (
     <div>
       <Route path="/login">
@@ -66,7 +76,7 @@ export const Login = (props) => {
           Log In
         </Button>
         <br></br>
-        <div className="makeLink" onClick={() => history.push("/signup")}>
+        <div className="makeLink" onClick={() => history.push("/signup")} onMouseOver={changeColor} onMouseOut={changeColorBack}>
           Don't have an account? Click to sign up.
         </div>
       </form>
