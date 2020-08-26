@@ -2,7 +2,8 @@ import { LOGIN_START,
   FETCH_LOGIN_SUCCESS, 
   FETCH_HOWTOS_START,
   FETCH_HOWTOS_SUCCESS,
-  SET_USER_ID } from "./actions";
+  SET_USER_ID,
+  FETCH_SPECIFIC_HOWTO } from "./actions";
 
 const initialState = {
   howTos: [],
@@ -44,7 +45,11 @@ export const reducer = (state = initialState, action) => {
           ...state,
           user_id: action.payload,
         }
-        
+      case FETCH_SPECIFIC_HOWTO:
+        return {
+          ...state,
+          howTo:action.payload,
+        }
         default:
         return state
   }

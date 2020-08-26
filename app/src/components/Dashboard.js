@@ -1,47 +1,51 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import HowToForm from "./HowToForm";
+import axios from "axios";
 import { axiosWithAuth } from "../utils/axiosWithAuth"
 import { fetchHowTos } from "../store/actions"
-import HowToCard from "./HowToCard";
+import HowToList from "./HowToList";
+import HowToForm from "./HowToForm"
+import { Link, useHistory } from "react-router-dom";
 
-//DASHBOARD//HOW-TO'S LIST//How-To form?
+//USER DASHBOARD NO FORM
 
 const Dashboard = (props) => {
   const [howToList, setHowToList] = useState([]);
+  const history = useHistory();
 
-  useEffect(() => {
+  const getHowToList = () => {
     axiosWithAuth()
-      .get("https://bw-how-2.herokuapp.com/api/howtos")
-      .then((response) => {
-          console.log(response)
-        setHowToList(response.data.howtos);
-      });
+      .get("/api/howtos")
+      .then((response) => setHowToList(response.data.howtos))
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {// refresh
+    getHowToList();
   }, []);
 
-  console.log('My ID is', props.user_id)
-  
   return (
     <>
       <div>
         <h1>Welcome to your How-To Dashboard</h1>
+        <h2>Create How-To:</h2>
+        <HowToForm />
         <h2>How-Tos:</h2>
+            <HowToList />
+        <br></br>
       </div>
-      <HowToForm />
-      <HowToCard />
     </>
   );
 };
 
 const mapStateToProps = (state) => {
-
   return {
     howTos: state.howTos,
     isLoading: state.isLoading,
     data: state.data,
     error: state.error,
-    user_id:state.user_id,
+    user_id: state.user_id,
   };
 };
 
-export default connect(mapStateToProps, {fetchHowTos})(Dashboard);
+export default connect(mapStateToProps, { fetchHowTos })(Dashboard);
