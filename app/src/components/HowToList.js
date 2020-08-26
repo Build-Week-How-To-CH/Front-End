@@ -16,27 +16,13 @@ const initialCard = {
   id: "",
 };
 
-<<<<<<< HEAD
 const HowToList = (props) => {
-=======
-const HowToList= (props) => {
   const [howTos, setHowTos] = useState([]);
->>>>>>> origin
   const [edit, setEdit] = useState(false);
   const [cardToEdit, setCardToEdit] = useState(initialCard);
   const history = useHistory();
   const [howToList, setHowToList] = useState([]);
 
-<<<<<<< HEAD
-  // useEffect(() => {
-  //   axiosWithAuth()
-  //     .get("/api/howtos")
-  //     .then((response) => {
-  //       // console.log(response);
-  //       setHowToList(response.data.howtos);
-  //     });
-  // }, []);
-=======
   useEffect(() => {
     axiosWithAuth()
       .get("/api/howtos")
@@ -45,7 +31,6 @@ const HowToList= (props) => {
         setHowToList(response.data.howtos);
       });
   }, []);
->>>>>>> origin
 
   const editCard = (card) => {
     setEdit(true);
@@ -97,7 +82,7 @@ const HowToList= (props) => {
     fetchHowToes();
   }, []);
 
-  fetchHowToes()
+  fetchHowToes();
 
   return (
     // ***BEA working on cards***
@@ -124,63 +109,8 @@ const HowToList= (props) => {
           })}
         </>
       </div>
-
-      {/* GALO */}
-
-      {howToList.map((toes) => (
-        <div className="howToCards" key={toes.id}>
-          <h2>{toes.title}</h2>
-          <h3>{toes.author}</h3>
-          <p>{toes.category}</p>
-          <button onClick={() => editCard(toes)}>Edit</button>
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              deleteCard(toes);
-            }}
-          >
-            Delete
-          </button>
-        </div>
-      ))}
-      {edit ? (
-        <form onSubmit={saveEdit}>
-          <h2>Edit How-To</h2>
-          <label>
-            Title:
-            <input
-              onChange={(e) =>
-                setCardToEdit({ ...cardToEdit, title: e.target.value })
-              }
-              value={cardToEdit.title}
-            />
-          </label>
-          <div>
-            <button type="submit">Save</button>
-            <button
-              onClick={() => {
-                setEdit(false);
-                setCardToEdit(initialCard);
-              }}
-            >
-              Cancel
-            </button>
-          </div>
-        </form>
-      ) : (
-        <form onSubmit={handleSubmit}>
-          <h2>Add How-To</h2>
-          <label>Title:</label>
-          <input
-            onChange={(e) =>
-              setCardToEdit({ ...cardToEdit, title: e.target.value })
-            }
-            value={cardToEdit.title}
-          />
-        </form>
-      )}
     </div>
   );
 };
 
-export default connect(null, { deleteHowTo })(HowToList);
+export default HowToList;
