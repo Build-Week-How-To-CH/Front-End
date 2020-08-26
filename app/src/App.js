@@ -127,7 +127,7 @@ const App = () => {
         <Route path="/howtos/:id">
           <HowTo />
         </Route>
-        <PrivateRoute exxact path="/dashboard" component={Dashboard}/>
+        <PrivateRoute exact path="/dashboard" component={Dashboard}/>
          
         <Route path="/">
           <Login />
