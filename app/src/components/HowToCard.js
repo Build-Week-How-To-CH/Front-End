@@ -18,7 +18,18 @@ const HowToCard = (props) => {
   const [howTos, setHowTos] = useState([]);
   const [edit, setEdit] = useState(false);
   const [cardToEdit, setCardToEdit] = useState(initialCard);
-  const history = useHistory()
+  const history = useHistory();
+  const [howToList, setHowToList] = useState([]);
+
+  useEffect(() => {
+    axiosWithAuth()
+      .get("https://bw-how-2.herokuapp.com/api/howtos")
+      .then((response) => {
+        setHowToList(response.data.data);
+          console.log(response)
+        setHowToList(response.data.howtos);
+      });
+  }, []);
 
   const editCard = (card) => {
     setEdit(true);

@@ -47,3 +47,14 @@ body {
     transform: rotate(360deg);
   }
 }
+
+#howToCards {
+  border: 1px solid black;
+  margin: 0 35%;
+  background-color: aliceblue;
+  padding: 2% 1%;
+}
+
+#howToCards:hover {
+  background-color:rgba(128, 128, 128, 0.589) ;
+}
