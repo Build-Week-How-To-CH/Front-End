@@ -7,12 +7,15 @@ export const HowToEdit = () => {
   const history = useHistory();
   const [card, setCard] = useState(null);
   const params = useParams();
+
   const initialCard = {
+    user_id: "2", // 2 is admin - only admind can change HT
     title: "",
-    author: "",
     category: "",
+    content: "",
     id: params.id,
   };
+
   const [cardToEdit, setCardToEdit] = useState(initialCard);
 
   const fetchHowTo = (id) => {
@@ -31,10 +34,10 @@ export const HowToEdit = () => {
     axiosWithAuth()
       .put(`/api/howtos/${params.id}`, cardToEdit)
       .then((res) => {
-        // history.push(`/api/howtos/${params.id}`)
+        history.push('/dashboard')
         console.log(res);
       })
-      .catch((err) => console.log(err, "lol"));
+      .catch((err) => alert("LOL Must be an admin", err));
   };
 
   const onChange = (e) => {
@@ -44,8 +47,6 @@ export const HowToEdit = () => {
       [name]: value,
     });
   };
-
-  // console.log(card.howto)
 
   return (
     <div>
