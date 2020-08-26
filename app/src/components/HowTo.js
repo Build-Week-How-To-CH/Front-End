@@ -4,10 +4,21 @@ import { xyz } from "../store";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { HowToEdit } from "./HowToEdit";
 import { useParams } from "react-router-dom";
+import Modal from 'react-awesome-modal'
 
 
 
 function HowTo(props) {
+  const [visible, setVisible] = useState(false)
+  
+const openModal = () => {
+  setVisible(true)
+}
+
+const closeModal = () => {
+  setVisible(false)
+}
+
   const id = useParams().id;
 
   useEffect(() => {
@@ -21,10 +32,13 @@ function HowTo(props) {
           <h2>{props.howTo.title}</h2>
           <h3>{props.howTo.category}</h3>
           <p>{props.howTo.content}</p>
-          <button>Edit</button>
         </container>
       )}
+      <input type="button" value="Edit" onClick={() => openModal()} />
+      <Modal visible={visible} width='400' height='300' effect='fadeInUp' onClickAway={closeModal}>
       <HowToEdit />
+      <button className='edit-button' onClick={() => this.closeModal()}>Close</button>
+      </Modal>
     </div>
   );
 }
