@@ -75,6 +75,7 @@ const HowToCard = (props) => {
           <h2>{toes.title}</h2>
           <h3>{toes.author}</h3>
           <p>{toes.category}</p>
+          {/* <p>{toes.content}</p> */}
           <button onClick={() => editCard(toes)}>Edit</button>
 
           <button
