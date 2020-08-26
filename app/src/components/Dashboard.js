@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import axios from 'axios'
+import axios from "axios";
+import { axiosWithAuth } from "../utils/axiosWithAuth"
 import { fetchHowTos } from "../store/actions"
 import HowToList from "./HowToList";
 import HowToForm from "./HowToForm"
@@ -13,32 +14,15 @@ const Dashboard = (props) => {
   const history = useHistory();
 
   const getHowToList = () => {
-    axios
-      .get("https://bw-how-2.herokuapp.com/api/howtos")
+    axiosWithAuth()
+      .get("/api/howtos")
       .then((response) => setHowToList(response.data.howtos))
       .catch((err) => console.log(err));
   };
 
-  useEffect(() => {
-    // refresh
+  useEffect(() => {// refresh
     getHowToList();
-  }, [howToList]);
-
-  // useEffect(() => {
-  //   axiosWithAuth()
-  //     .get("https://bw-how-2.herokuapp.com/api/howtos")
-  //     .then((response) => {
-  //         console.log(response)
-  //       setHowToList(response.data.howtos);
-  //     });
-  // }, []);
-
-  useEffect(() => {
-    // refresh
-    getHowToList();
-  }, [howToList]);
-
-  // console.log('My ID is', props.user_id)
+  }, []);
 
   return (
     <>
@@ -47,13 +31,7 @@ const Dashboard = (props) => {
         <h2>Create How-To:</h2>
         <HowToForm />
         <h2>How-Tos:</h2>
-        {
-          howToList.map(ht => (
-          <Link key={ht.id} to={`/dashboard/${ht.id}`}> 
-            <HowToList ht={ht} getHowTosList={props.getHowTosList}
-          />
-          </Link>
-          ))}
+            <HowToList />
         <br></br>
       </div>
     </>

@@ -4,8 +4,8 @@
 import React, { useState, useEffect } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { connect } from "react-redux";
-import { deleteHowTo } from "../store/actions";
 import { Link, useHistory } from "react-router-dom";
+import axios from "axios";
 
 import HowTo from "./HowTo";
 
@@ -16,21 +16,20 @@ const initialCard = {
   id: "",
 };
 
-const HowToCard = (props) => {
-  const [howTos, setHowTos] = useState([]);
+const HowToList = (props) => {
   const [edit, setEdit] = useState(false);
   const [cardToEdit, setCardToEdit] = useState(initialCard);
   const history = useHistory();
   const [howToList, setHowToList] = useState([]);
 
-  useEffect(() => {
-    axiosWithAuth()
-      .get("https://bw-how-2.herokuapp.com/api/howtos")
-      .then((response) => {
-        // console.log(response);
-        setHowToList(response.data.howtos);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axiosWithAuth()
+  //     .get("/api/howtos")
+  //     .then((response) => {
+  //       // console.log(response);
+  //       setHowToList(response.data.howtos);
+  //     });
+  // }, []);
 
   const editCard = (card) => {
     setEdit(true);
@@ -69,22 +68,29 @@ const HowToCard = (props) => {
       .catch((err) => console.log(err));
   };
 
-  useEffect(() => {
+  const fetchHowToes = () => {
     axiosWithAuth()
       .get(`/api/howtos`)
       .then((res) => {
-        setHowTos(res.data.howtos);
+        setHowToList(res.data.howtos);
       })
       .catch((error) => console.log(error));
+  };
+
+  useEffect(() => {
+    fetchHowToes();
   }, []);
+
+  fetchHowToes()
+
   return (
     // ***BEA working on cards***
     // when you click on a how on the list in dashboard it routes to the specific ID
     <div>
       <div className="howToListContainer">
         <>
-          {howToList.map((ht,toes) => {
-            console.log('Here', ht)
+          {howToList.map((ht, toes) => {
+            // console.log("Here", ht);
             return (
               <Link id="linksDash" key={ht.id} to={`/howtos/${ht.id}`}>
                 <h2>{ht.title}</h2>
@@ -92,8 +98,11 @@ const HowToCard = (props) => {
                 <button
                   onClick={(e) => {
                     e.preventDefault();
-                    deleteCard(toes);
-                  }}>Delete</button>
+                    deleteCard(ht);
+                  }}
+                >
+                  Delete
+                </button>
               </Link>
             );
           })}
@@ -101,8 +110,8 @@ const HowToCard = (props) => {
       </div>
 
       {/* GALO */}
-{/* 
-      {howTos.map((toes) => (
+
+      {howToList.map((toes) => (
         <div className="howToCards" key={toes.id}>
           <h2>{toes.title}</h2>
           <h3>{toes.author}</h3>
@@ -153,9 +162,9 @@ const HowToCard = (props) => {
             value={cardToEdit.title}
           />
         </form>
-      )} */}
+      )}
     </div>
   );
 };
 
-export default connect(null, { deleteHowTo })(HowToCard);
+export default HowToList;
