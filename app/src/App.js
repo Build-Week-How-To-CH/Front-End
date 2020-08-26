@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, Route, Switch, useHistory } from "react-router-dom";
 import axios from "axios";
-import * as yup from "yup";
 import "./App.css";
-import SignUp from "./components/SignUp";
+
+import * as yup from "yup";
 import formSchema from "./components/FormSchema";
+
+import SignUp from "./components/SignUp";
 import { Login } from "./components/Login";
-// import { axiosWithAuth } from './utils/axiosWithAuth';
-
+import HowTo from "./components/HowTo"
 import Dashboard from './components/Dashboard'
-import styled from 'styled-components'
-
 
 // SIGNUP
 
@@ -26,10 +25,7 @@ const initialFormErrors = {
 
 const initialDisabled = true;
 
-
 const App = () => {
-
-
   const [users, setUsers] = useState([])
 
   const [formValues, setFormValues] = useState(initialFormValues);
@@ -93,7 +89,6 @@ const App = () => {
       username: formValues.username.trim(),
       password: formValues.password.trim(),
       isAdmin: false,
-
     };
     postNewUser(newUser);
   };
@@ -114,9 +109,6 @@ const App = () => {
       {/* we can eventually add these to the nav bar for UNIT 1 ppl */}
 
       <Switch>
-        <Route exact path="/">
-          <Login />
-        </Route>
         <Route path="/signup">
           <SignUp
             values={formValues}
@@ -126,8 +118,14 @@ const App = () => {
             errors={formErrors}
           />
         </Route>
+        <Route path="/howtos/:id">
+          <HowTo />
+        </Route>
         <Route path="/dashboard">
           <Dashboard />
+        </Route>
+        <Route path="/">
+          <Login />
         </Route>
       </Switch>
     </div>
