@@ -89,7 +89,6 @@ const App = () => {
       username: formValues.username.trim(),
       password: formValues.password.trim(),
       isAdmin: false,
-
     };
     postNewUser(newUser);
   };

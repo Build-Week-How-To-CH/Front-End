@@ -1,56 +1,65 @@
-// HOW-TO form create a new How-To 
+// HOW-TO form create a new How-To
 // ADD/SUBMIT functionality
 
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import axios from "axios"
+import axios from "axios";
 
-import {axiosWithAuth} from '../utils/axiosWithAuth'
-
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const initialFormValues = {
-    title: '',
-    category: '',
-    content: '',
-}
+  title: "",
+  category: "",
+  content: "",
+};
 
 export default function HowToForm(props) {
-    const [formValues, setFormValues] = useState(initialFormValues);
-    const [formOpen, setFormOpen] = useState(false)
-    const [howTo, setHowTo] = useState(null)
-    const history = useHistory();
+  const [formValues, setFormValues] = useState(initialFormValues);
+  const [formOpen, setFormOpen] = useState(false);
+  const [howTo, setHowTo] = useState(null);
+  const history = useHistory();
 
-    const handleChange = (e) => {
-      setFormValues({
-        ...formValues,
-        [e.target.name]: e.target.value,
-      });
+  const handleChange = (e) => {
+    setFormValues({
+      ...formValues,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const postNewHowTo = (e) => {
+    e.preventDefault();
+    const postData = {
+      title: formValues.title,
+      category: formValues.category,
+      content: formValues.content,
+      user_id: 1,
     };
+    axiosWithAuth()
+      .post("/api/howtos", postData)
+      .then((res) => {
+        console.log(res);
+        props.getHowTosList();
+        setFormValues(res.data);
+        // history.push("/");
+      })
+      .catch((error) => console.log(error));
+  };
 
   const closeEditForm = () => {
-      setFormOpen(false)
-      setFormValues(initialFormValues)
-  }
+    setFormOpen(false);
+    setFormValues(initialFormValues);
+  };
 
-    const postNewHowTo = (e) => {
-        e.preventDefault();
-        const postData = {
-          title: formValues.title,
-          category: formValues.category,
-          content: formValues.content,
-          user_id: 1,
-        };
-        axiosWithAuth()
-
-          .post("/api/howtos", postData)
-          .then((res) => {
-            console.log(res)
-            props.getHowTosList();
-            setFormValues(res.data)
-            // history.push("/");
-          })
-          .catch((error) => console.log(error));
-      };
+  const postNewHowTo = (e) => {
+    e.preventDefault();
+    const postData = {
+      title: formValues.title,
+      category: formValues.category,
+      content: formValues.content,
+      user_id: 1,
+    };
+    axiosWithAuth();
+  };
   return (
     <div>
       <form onSubmit={postNewHowTo}>

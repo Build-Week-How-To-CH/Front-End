@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import HowToForm from "./HowToForm";
-// import { axiosWithAuth } from "../utils/axiosWithAuth"
-import { fetchHowTos } from "../store/actions";
-import HowToList from "./HowToList";
-import axios from "axios";
-// import { Route, useHistory } from "react-router-dom";
+import { axiosWithAuth } from "../utils/axiosWithAuth"
+import { fetchHowTos } from "../store/actions"
+import HowToCard from "./HowToCard";
+import HowToForm from "./HowToForm"
+import { Link, useHistory } from "react-router-dom";
 
-//DASHBOARD//HOW-TO'S LIST//How-To form?
+//USER DASHBOARD NO FORM
 
 const Dashboard = (props) => {
   const [howToList, setHowToList] = useState([]);
-  // const history = useHistory()
+  const history = useHistory();
 
   const getHowToList = () => {
     axios
@@ -45,12 +44,18 @@ const Dashboard = (props) => {
     <>
       <div>
         <h1>Welcome to your How-To Dashboard</h1>
-        <hr></hr>
+        <h2>Create How-To:</h2>
+        <HowToForm />
         <h2>How-Tos:</h2>
+        {
+          howToList.map(ht => (
+          <Link key={ht.id} to={`/dashboard/${ht.id}`}> 
+            <HowToCard ht={ht} getHowTosList={props.getHowTosList}
+          />
+          </Link>
+          ))}
         <br></br>
-        <HowToList />
       </div>
-      <HowToForm />
     </>
   );
 };
