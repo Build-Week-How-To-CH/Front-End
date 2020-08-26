@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { axiosWithAuth } from "../utils/axiosWithAuth"
+import axios from 'axios'
 import { fetchHowTos } from "../store/actions"
-import HowToCard from "./HowToCard";
+import HowToList from "./HowToList";
 import HowToForm from "./HowToForm"
 import { Link, useHistory } from "react-router-dom";
 
@@ -50,7 +50,7 @@ const Dashboard = (props) => {
         {
           howToList.map(ht => (
           <Link key={ht.id} to={`/dashboard/${ht.id}`}> 
-            <HowToCard ht={ht} getHowTosList={props.getHowTosList}
+            <HowToList ht={ht} getHowTosList={props.getHowTosList}
           />
           </Link>
           ))}
