@@ -101,9 +101,7 @@ const HowToList = (props) => {
                     e.preventDefault();
                     deleteCard(ht);
                   }}
-                >
-                  Delete
-                </button>
+                >Delete</button>
               </Link>
             );
           })}

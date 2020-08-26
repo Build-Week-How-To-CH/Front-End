@@ -30,7 +30,7 @@ export const Login = (props) => {
     axios
       .post("https://bw-how-2.herokuapp.com/api/auth/login", creds) //need to add an endpoint
       .then((res) => {
-        // console.log(res);
+        console.log('login',res);
         // props.setUserId(res.data.user.id);
         localStorage.setItem("token", res.data.token);
         history.push("/dashboard"); //endpoint for dashboard

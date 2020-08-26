@@ -28,11 +28,10 @@ const Dashboard = (props) => {
     <>
       <div>
         <h1>Welcome to your How-To Dashboard</h1>
-        <h2>Create How-To:</h2>
-        <HowToForm />
         <h2>How-Tos:</h2>
             <HowToList />
         <br></br>
+        <HowToForm />
       </div>
     </>
   );

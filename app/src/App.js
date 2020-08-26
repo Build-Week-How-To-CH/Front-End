@@ -11,6 +11,8 @@ import { Login } from "./components/Login";
 import HowTo from "./components/HowTo"
 import Dashboard from './components/Dashboard'
 
+import PrivateRoute from "./components/PrivateRoute"
+
 // SIGNUP
 
 const initialFormValues = {
@@ -125,9 +127,8 @@ const App = () => {
         <Route path="/howtos/:id">
           <HowTo />
         </Route>
-        <Route path="/dashboard">
-          <Dashboard />
-        </Route>
+        <PrivateRoute exxact path="/dashboard" component={Dashboard}/>
+         
         <Route path="/">
           <Login />
         </Route>
