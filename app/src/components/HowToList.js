@@ -16,12 +16,18 @@ const initialCard = {
   id: "",
 };
 
+<<<<<<< HEAD
 const HowToList = (props) => {
+=======
+const HowToList= (props) => {
+  const [howTos, setHowTos] = useState([]);
+>>>>>>> origin
   const [edit, setEdit] = useState(false);
   const [cardToEdit, setCardToEdit] = useState(initialCard);
   const history = useHistory();
   const [howToList, setHowToList] = useState([]);
 
+<<<<<<< HEAD
   // useEffect(() => {
   //   axiosWithAuth()
   //     .get("/api/howtos")
@@ -30,6 +36,16 @@ const HowToList = (props) => {
   //       setHowToList(response.data.howtos);
   //     });
   // }, []);
+=======
+  useEffect(() => {
+    axiosWithAuth()
+      .get("/api/howtos")
+      .then((response) => {
+        // console.log(response);
+        setHowToList(response.data.howtos);
+      });
+  }, []);
+>>>>>>> origin
 
   const editCard = (card) => {
     setEdit(true);
@@ -167,4 +183,4 @@ const HowToList = (props) => {
   );
 };
 
-export default HowToList;
+export default connect(null, { deleteHowTo })(HowToList);

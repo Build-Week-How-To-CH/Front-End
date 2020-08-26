@@ -22,9 +22,9 @@ export const HowToEdit = () => {
       .catch((err) => err);
   };
 
-useEffect(() => {
-  fetchHowTo(params.id)
-}, [params.id])
+  useEffect(() => {
+    fetchHowTo(params.id);
+  }, [params.id]);
 
   const putHowTo = (e) => {
     e.preventDefault();
@@ -32,9 +32,9 @@ useEffect(() => {
       .put(`/api/howtos/${params.id}`, cardToEdit)
       .then((res) => {
         // history.push(`/api/howtos/${params.id}`)
-        console.log(res)
+        console.log(res);
       })
-      .catch((err) => console.log(err, 'lol'));
+      .catch((err) => console.log(err, "lol"));
   };
 
   const onChange = (e) => {
@@ -47,30 +47,32 @@ useEffect(() => {
 
   // console.log(card.howto)
 
-  return <div>
-    <form onSubmit={putHowTo}>
-      <input 
-        name='title'
-        placeholder='change the title...'
-        type='text'
-        value={cardToEdit.title}
-        onChange={onChange}
-      />
-      <input 
-        name='category'
-        placeholder='change the category...'
-        type='text'
-        value={cardToEdit.category}
-        onChange={onChange}
-      />
-      <input 
-        name='content'
-        placeholder='change the content...'
-        type='text'
-        value={cardToEdit.content}
-        onChange={onChange}
-      />
-      <button>save</button>
-    </form>
-  </div>;
+  return (
+    <div>
+      <form onSubmit={putHowTo}>
+        <input
+          name="title"
+          placeholder="change the title..."
+          type="text"
+          value={cardToEdit.title}
+          onChange={onChange}
+        />
+        <input
+          name="category"
+          placeholder="change the category..."
+          type="text"
+          value={cardToEdit.category}
+          onChange={onChange}
+        />
+        <input
+          name="content"
+          placeholder="change the content..."
+          type="text"
+          value={cardToEdit.content}
+          onChange={onChange}
+        />
+        <button>save</button>
+      </form>
+    </div>
+  );
 };

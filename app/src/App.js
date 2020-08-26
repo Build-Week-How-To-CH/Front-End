@@ -34,14 +34,14 @@ const App = () => {
   const history = useHistory();
 
   const getUsers = () => {
-    axios.get('https://bw-how-2.herokuapp.com/api/users')
+    axios.get(`https://bw-how-2.herokuapp.com/api/users`)
     // axios.get('https://reqres.in/api/users')
       .then(res => {
         setUsers(res.data.data)
-        console.log(res.data)
+        console.log(res)
       })
       .catch(err => {
-        debugger
+        console.log(err)
       })
   }
 
@@ -98,6 +98,10 @@ const App = () => {
       setDisabled(!valid);
     });
   }, [formValues]);
+
+  useEffect(() => {
+    getUsers()
+  }, [])
 
 
   return (
