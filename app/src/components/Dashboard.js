@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import HowToForm from "./HowToForm";
 // import { axiosWithAuth } from "../utils/axiosWithAuth"
 import { fetchHowTos } from "../store/actions";
-import HowToCard from "./HowToCard";
+import HowToList from "./HowToList";
 import axios from "axios";
 // import { Route, useHistory } from "react-router-dom";
 
@@ -19,6 +19,11 @@ const Dashboard = (props) => {
       .then((response) => setHowToList(response.data.howtos))
       .catch((err) => console.log(err));
   };
+
+  useEffect(() => {
+    // refresh
+    getHowToList();
+  }, [howToList]);
 
   // useEffect(() => {
   //   axiosWithAuth()
@@ -40,11 +45,10 @@ const Dashboard = (props) => {
     <>
       <div>
         <h1>Welcome to your How-To Dashboard</h1>
+        <hr></hr>
         <h2>How-Tos:</h2>
-        <div id="howToCards">
-          <HowToCard />
-        </div>
-
+        <br></br>
+        <HowToList />
       </div>
       <HowToForm />
     </>
