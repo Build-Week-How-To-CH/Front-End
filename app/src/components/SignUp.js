@@ -1,8 +1,8 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { NavLink, Route, useHistory } from "react-router-dom";
-import styled from 'styled-components';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import styled from "styled-components";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 
 // Styling
 
@@ -12,7 +12,7 @@ const StyledDiv = styled.div`
 `;
 
 const StyledLink = styled.div`
-  margin-top:1%;
+  margin-top: 1%;
   margin-bottom: 1%;
 `;
 
@@ -21,7 +21,7 @@ const StyledHeading = styled.h4`
 `;
 
 const StyledButton = styled.div`
-  margin-top:1%;
+  margin-top: 1%;
 `;
 
 function SignUp(props) {
@@ -67,23 +67,32 @@ function SignUp(props) {
               <h4>Sign Up</h4>
             </StyledHeading>
 
-              <TextField
-                value={values.username}
-                onChange={onInputChange}
-                name="username"
-                type="text"
-                label = "Username"
-              />
+            <TextField
+              value={values.username}
+              onChange={onInputChange}
+              name="username"
+              type="text"
+              label="Username"
+            />
 
-              <TextField
-                value={values.password}
-                onChange={onInputChange}
-                name="password"
-                type="password"
-                label="Password"
-              />
+            <TextField
+              value={values.password}
+              onChange={onInputChange}
+              name="password"
+              type="password"
+              label="Password"
+            />
 
-            <StyledButton><Button variant = 'contained' color = 'primary' disabled={disabled}>Sign me up!</Button></StyledButton>
+            <StyledButton>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                disabled={disabled}
+              >
+                Sign me up!
+              </Button>
+            </StyledButton>
             <br></br>
             <StyledLink>
               <div

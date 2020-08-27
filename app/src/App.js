@@ -10,7 +10,7 @@ import SignUp from "./components/SignUp";
 import { Login } from "./components/Login";
 import HowTo from "./components/HowTo"
 import Dashboard from './components/Dashboard'
-
+import {axiosWithAuth} from './utils/axiosWithAuth'
 import PrivateRoute from "./components/PrivateRoute"
 
 // SIGNUP
@@ -36,7 +36,8 @@ const App = () => {
   const history = useHistory();
 
   const getUsers = () => {
-    axios.get(`https://bw-how-2.herokuapp.com/api/users`)
+    axiosWithAuth()
+    .get(`/api/users`)
     // axios.get('https://reqres.in/api/users')
       .then(res => {
         setUsers(res.data.data)
