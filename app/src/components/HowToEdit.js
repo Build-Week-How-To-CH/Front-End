@@ -34,6 +34,7 @@ export const HowToEdit = () => {
     axiosWithAuth()
       .put(`/api/howtos/${params.id}`, cardToEdit)
       .then((res) => {
+        setCardToEdit(initialCard);
         history.push("/dashboard");
         console.log(res);
       })

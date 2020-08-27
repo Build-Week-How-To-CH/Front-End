@@ -65,7 +65,6 @@ const HowToList = (props) => {
       .get(`/api/howtos`)
       .then((res) => {
         setHowToList(res.data.howtos);
-        fetchHowToes();
       })
       .catch((error) => console.log(error));
   };
