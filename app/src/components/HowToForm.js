@@ -43,6 +43,7 @@ export default function HowToForm(props) {
         // history.push("/");
       })
       .catch((error) => console.log(error));
+      setFormValues(initialFormValues)
   };
 
   const closeEditForm = () => {
@@ -50,16 +51,6 @@ export default function HowToForm(props) {
     setFormValues(initialFormValues);
   };
 
-  // const postNewHowTo = (e) => {
-  //   e.preventDefault();
-  //   const postData = {
-  //     title: formValues.title,
-  //     category: formValues.category,
-  //     content: formValues.content,
-  //     user_id: 1,
-  //   };
-  //   axiosWithAuth();
-  // };
   return (
     <div>
       <form onSubmit={postNewHowTo}>
@@ -67,9 +58,9 @@ export default function HowToForm(props) {
         <label htmlFor="title">Title:&nbsp;</label>
         <input
           type="text"
-          id="name"
+          id="title"
           name="title"
-          value={formValues.name}
+          value={formValues.title}
           onChange={handleChange}
         />
         <br />

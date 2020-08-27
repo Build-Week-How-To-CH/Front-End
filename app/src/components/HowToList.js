@@ -73,7 +73,7 @@ const HowToList = (props) => {
   useEffect(() => {
     fetchHowToes();
   }, []);
-
+  
   console.log(isAdmin);
 
   return (
