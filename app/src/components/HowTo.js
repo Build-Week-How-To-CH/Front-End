@@ -6,8 +6,6 @@ import { HowToEdit } from "./HowToEdit";
 import { useParams } from "react-router-dom";
 import Modal from 'react-awesome-modal'
 
-
-
 function HowTo(props) {
   const [visible, setVisible] = useState(false)
   
