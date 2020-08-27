@@ -22,7 +22,7 @@ const StyledHeading = styled.h4`
 
 const StyledButton = styled.div`
   margin-top:1%;
-`
+`;
 
 function SignUp(props) {
   const { values, submit, inputChange, disabled, errors } = props;

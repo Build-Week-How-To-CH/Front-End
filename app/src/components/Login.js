@@ -33,6 +33,7 @@ export const Login = (props) => {
         console.log('login',res);
         // props.setUserId(res.data.user.id);
         localStorage.setItem("token", res.data.token);
+        localStorage.setItem("isAdmin", res.data.user.isAdmin);
         history.push("/dashboard"); //endpoint for dashboard
       })
       .catch((err) => err);
