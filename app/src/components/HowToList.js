@@ -22,14 +22,19 @@ const HowToList = (props) => {
   const [cardToEdit, setCardToEdit] = useState(initialCard);
   const history = useHistory();
   const [howToList, setHowToList] = useState([]);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     axiosWithAuth()
       .get("/api/howtos")
       .then((response) => {
-        // console.log(response);
         setHowToList(response.data.howtos);
       });
+    if (localStorage.getItem("isAdmin") === "false") {
+      setIsAdmin(false);
+    } else {
+      setIsAdmin(true);
+    }
   }, []);
 
   const editCard = (card) => {
@@ -82,11 +87,9 @@ const HowToList = (props) => {
     fetchHowToes();
   }, []);
 
-  fetchHowToes();
+  console.log(isAdmin);
 
   return (
-    // ***BEA working on cards***
-    // when you click on a how on the list in dashboard it routes to the specific ID
     <div>
       <div className="howToListContainer">
         <>
@@ -96,14 +99,17 @@ const HowToList = (props) => {
               <Link id="linksDash" key={ht.id} to={`/howtos/${ht.id}`}>
                 <h2>{ht.title}</h2>
                 <h3>{ht.category}</h3>
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    deleteCard(ht);
-                  }}
-                >
-                  Delete
-                </button>
+
+                {isAdmin && (
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      deleteCard(ht);
+                    }}
+                  >
+                    Delete
+                  </button>
+                )}
               </Link>
             );
           })}
