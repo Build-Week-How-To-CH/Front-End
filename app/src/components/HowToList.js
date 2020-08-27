@@ -37,28 +37,13 @@ const HowToList = (props) => {
     }
   }, []);
 
-  const editCard = (card) => {
-    setEdit(true);
-    setCardToEdit(card);
-  };
-
-  const saveEdit = (e) => {
-    e.preventDefault();
-    axiosWithAuth()
-      .put(`/api/howtos/${e.id}`, cardToEdit)
-      .then((res) => {
-        setEdit(false);
-        setCardToEdit(initialCard);
-      })
-      .catch((err) => err);
-  };
-
   const deleteCard = (e) => {
     axiosWithAuth()
       .delete(`/api/howtos/${e.id}`)
       .then((res) => {
         setEdit(false);
         setCardToEdit(initialCard);
+        fetchHowToes();
       })
       .catch((err) => console.log(err, "lol"));
   };
@@ -70,6 +55,7 @@ const HowToList = (props) => {
       .post(`/api/howtos`, cardToEdit)
       .then((res) => {
         setCardToEdit(initialCard);
+        fetchHowToes();
       })
       .catch((err) => console.log(err));
   };
@@ -79,6 +65,7 @@ const HowToList = (props) => {
       .get(`/api/howtos`)
       .then((res) => {
         setHowToList(res.data.howtos);
+        fetchHowToes();
       })
       .catch((error) => console.log(error));
   };
@@ -91,7 +78,7 @@ const HowToList = (props) => {
 
   return (
     <div>
-      <div className="howToListContainer">
+      <div onSubmit={handleSubmit} className="howToListContainer">
         <>
           {howToList.map((ht, toes) => {
             // console.log("Here", ht);
