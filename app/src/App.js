@@ -105,7 +105,6 @@ const App = () => {
     getUsers()
   }, [])
 
-
   return (
     <div className="App">
       {/* <h3>New here? </h3>
