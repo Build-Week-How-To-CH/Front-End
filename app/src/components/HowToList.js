@@ -17,11 +17,10 @@ const initialCard = {
 };
 
 const HowToList = (props) => {
-  const [howTos, setHowTos] = useState([]);
   const [edit, setEdit] = useState(false);
   const [cardToEdit, setCardToEdit] = useState(initialCard);
   const history = useHistory();
-  const [howToList, setHowToList] = useState([]);
+  const {howToList, setHowToList} = props;
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
@@ -41,13 +40,21 @@ const HowToList = (props) => {
     axiosWithAuth()
       .delete(`/api/howtos/${e.id}`)
       .then((res) => {
+        let filterHT = howToList.filter(
+          (howTos) => howTos.id !== res.data.deletedHowto.id
+        );
+
+        console.log(res);
         setEdit(false);
         setCardToEdit(initialCard);
-        fetchHowToes();
+        setHowToList(filterHT);
+        console.log('listfiltered', howToList)
+        console.log(filterHT)
+        // fetchHowToes(); res.data.deletedHowTo.id
       })
       .catch((err) => console.log(err, "lol"));
   };
-
+console.log(howToList)
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -71,8 +78,8 @@ const HowToList = (props) => {
 
   useEffect(() => {
     fetchHowToes();
-  }, []);
-  
+  }, [howToList.length]);
+
   console.log(isAdmin);
 
   return (
