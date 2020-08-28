@@ -22,16 +22,16 @@ const Dashboard = (props) => {
 
   useEffect(() => {// refresh
     getHowToList();
-  }, []);
+  }, [howToList.length]);
 
   return (
     <>
       <div>
         <h1>Welcome to your How-To Dashboard</h1>
         <h2>How-Tos:</h2>
-            <HowToList />
+            <HowToList howToList={howToList} setHowToList={setHowToList}/>
         <br></br>
-        <HowToForm />
+        <HowToForm howToList={howToList} setHowToList={setHowToList}/>
       </div>
     </>
   );

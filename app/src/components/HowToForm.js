@@ -14,6 +14,7 @@ const initialFormValues = {
 };
 
 export default function HowToForm(props) {
+
   const [formValues, setFormValues] = useState(initialFormValues);
   const [formOpen, setFormOpen] = useState(false);
   const [howTo, setHowTo] = useState(null);
@@ -37,8 +38,8 @@ export default function HowToForm(props) {
     axiosWithAuth()
       .post("/api/howtos", postData)
       .then((res) => {
-        console.log(res);
-        props.getHowTosList();
+        console.log('response',res.data.howto);
+        props.setHowToList([...props.howToList,res.data.howto]);
         setFormValues(res.data);
         // history.push("/");
       })

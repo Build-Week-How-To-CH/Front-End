@@ -11,6 +11,7 @@ body {
 
 .App {
   text-align: center;
+  margin: 2% 0% 15% 0%;
 }
 
 .App-logo {
@@ -50,7 +51,7 @@ body {
 
 .howToListContainer {
   border: 1px solid black;
-  margin: 0 35%;
+  margin: 0 25%;
   background-color: aliceblue;
   padding: 2% 1%;
 }
